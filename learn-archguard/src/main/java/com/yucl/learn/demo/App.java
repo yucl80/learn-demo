@@ -30,7 +30,7 @@ public class App
        try {
             Git.cloneRepository()
                     .setURI("https://github.com/archguard/ddd-monolithic-code-sample")
-                    .setDirectory(new File("d:/tmp/kkkk1"))
+                    .setDirectory(new File("d:/tmp/kkkk2"))
                     .call();
         }catch (Exception e){
             e.printStackTrace();
