@@ -35,7 +35,7 @@ public class GitDiffChangesContext implements DiffChangesContext, GitContext, Sc
     @NotNull
     @Override
     public String getSince() {
-        return "9409f53e";
+        return "5952edc";
     }
 
     @NotNull
@@ -47,7 +47,7 @@ public class GitDiffChangesContext implements DiffChangesContext, GitContext, Sc
     @NotNull
     @Override
     public String getUntil() {
-        return "49f81b30";
+        return "f3fb4e2";
     }
 
     @NotNull
