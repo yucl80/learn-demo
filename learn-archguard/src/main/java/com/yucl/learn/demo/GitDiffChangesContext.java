@@ -17,7 +17,7 @@ public class GitDiffChangesContext implements DiffChangesContext, GitContext, Sc
     @NotNull
     @Override
     public String getBranch() {
-        return "test";
+        return "master";
     }
 
     @Override
