@@ -18,7 +18,7 @@ public class TestJavaParser {
 
         result.forEach(codeDataStruct -> {
             System.out.println(codeDataStruct.getClassFullName());
-            if(codeDataStruct.getExtend() != null){
+            if(!codeDataStruct.getExtend().isEmpty()){
                 System.out.println(codeDataStruct.getClassFullName() + " : " + codeDataStruct.getExtend());
             }
 

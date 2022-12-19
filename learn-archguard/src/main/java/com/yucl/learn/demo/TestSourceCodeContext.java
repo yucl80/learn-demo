@@ -8,6 +8,17 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public class TestSourceCodeContext implements SourceCodeContext {
+
+    private String path = "D:\\workspaces\\IdeaProjects\\learn-demo\\demoproject";
+
+    public TestSourceCodeContext (){
+
+    }
+
+    public TestSourceCodeContext(String path){
+        this.path = path ;
+    }
+
     @NotNull
     @Override
     public AnalyserType getType() {
@@ -29,7 +40,7 @@ public class TestSourceCodeContext implements SourceCodeContext {
     @NotNull
     @Override
     public String getPath() {
-        return "D:\\Downloads\\demo\\demo\\src\\main\\java";
+        return path;
     }
 
     @NotNull
