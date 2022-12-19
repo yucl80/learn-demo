@@ -31,7 +31,7 @@ public class TestJavaParser {
        result.forEach(codeDataStruct -> {
             Arrays.stream(codeDataStruct.getFunctions()).forEach(codeFunction -> {
                 Arrays.stream(codeFunction.getFunctionCalls()).forEach(codeCall -> {
-                    System.out.println(codeDataStruct.getClassFullName() + "  :  " + codeFunction.getName() + " -> " + codeCall.buildFullMethodName());
+                    System.out.println(codeDataStruct.getClassFullName() + "  :  " + codeFunction.getName() + " -> " + codeCall.buildFullMethodName() + "   " + codeCall.getFunctionName() + "   " + codeCall.getNodeName() + "   " + codeCall.buildClassFullName());
                 });
             });
         });
