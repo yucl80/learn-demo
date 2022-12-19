@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface CommentRepository extends JpaRepository<Object, Integer> {
 
-    @Query("SELECT c.year, COUNT(c.year) FROM Comment AS c GROUP BY c.year ORDER BY c.year DESC")
+    @Query("SELECT c.year, COUNT(c.year) FROM Comment join Test AS c GROUP BY c.year ORDER BY c.year DESC")
     List<Object[]> countTotalCommentsByYear();
 
 }

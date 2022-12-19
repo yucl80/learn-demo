@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+
 @Service
 public class ServicA {
     @Autowired
@@ -25,6 +27,11 @@ public class ServicA {
         String str = cityMapper.findByState("test");
 
         commentRepository.countTotalCommentsByYear();
+
+        Arrays.asList(1,2,3,4).stream().map(m -> serviceB.add(m,m)).map(s->s.toString()).map(Utils::hello).forEach(v->{
+            System.out.println(v);
+        });
+
         return str.length();
     }
 }
