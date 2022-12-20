@@ -17,5 +17,6 @@
     <module>learn-javaparser</module>
     <module>learn-jdt</module>
       <module>learn-nebula</module>
+      <module>learn-hugegraph</module>
   </modules>
   </project>
