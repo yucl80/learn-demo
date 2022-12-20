@@ -110,7 +110,7 @@ public class GraphClientExample {
 
             TimeUnit.SECONDS.sleep(5);
             {
-                String insertVertexes = "USE test; INSERT VERTEX person(name, age) VALUES "
+                String insertVertexes = " INSERT VERTEX person(name, age) VALUES "
                         + "'Bob':('Bob', 10), "
                         + "'Lily':('Lily', 9), "
                         + "'Tom':('Tom', 10), "
