@@ -46,13 +46,17 @@ public class MethodVisitor extends EmptyVisitor {
     public void visitGETSTATIC(GETSTATIC getstatic) {
         super.visitGETSTATIC(getstatic);
         //System.out.println(getstatic.getName());
-        if (getstatic.getFieldName(cpg).equals("map") && this.mg.getMethod().getName().equals("<clinit>")) {
-            // System.out.println(ih.getNext().getNext().getInstruction());
-            ih = ih.getNext();
-            Object key = ((LDC) ih.getInstruction()).getValue(cpg);
-            ih = ih.getNext();
-            Object value = ((LDC) ih.getInstruction()).getValue(cpg);
-            System.out.println("key：" + key + " ; value:" + value);
+        if (getstatic.getFieldName(cpg).equals("map") ) {
+            if(this.mg.getMethod().getName().equals("<clinit>")) {
+                // System.out.println(ih.getNext().getNext().getInstruction());
+                ih = ih.getNext();
+                Object key = ((LDC) ih.getInstruction()).getValue(cpg);
+                ih = ih.getNext();
+                Object value = ((LDC) ih.getInstruction()).getValue(cpg);
+                System.out.println("key：" + key + " ; value:" + value);
+            }else{
+                String methodSignature =  mg.getMethod().getSignature();// 与map相关联的方法。
+            }
         }
     }
 
