@@ -18,5 +18,6 @@
     <module>learn-jdt</module>
       <module>learn-nebula</module>
       <module>learn-hugegraph</module>
+      <module>learn-bcel</module>
   </modules>
   </project>

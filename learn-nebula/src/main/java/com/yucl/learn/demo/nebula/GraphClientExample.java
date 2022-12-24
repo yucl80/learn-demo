@@ -116,7 +116,9 @@ public class GraphClientExample {
                         + "'Tom':('Tom', 10), "
                         + "'Jerry':('Jerry', 13), "
                         + "'John':('John', 11);";
+                long startTime = System.currentTimeMillis();
                 ResultSet resp = session.execute(insertVertexes);
+                System.out.println(resp.isSucceeded() + String.valueOf( System.currentTimeMillis() - startTime));
                 if (!resp.isSucceeded()) {
                     log.error(String.format("Execute: `%s', failed: %s",
                             insertVertexes, resp.getErrorMessage()));

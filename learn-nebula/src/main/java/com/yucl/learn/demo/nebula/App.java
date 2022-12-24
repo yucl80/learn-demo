@@ -18,7 +18,7 @@ public class App
     {
         try {
             NebulaPoolConfig nebulaPoolConfig = new NebulaPoolConfig();
-            nebulaPoolConfig.setMaxConnSize(10);
+            nebulaPoolConfig.setMaxConnSize(20);
             List<HostAddress> addresses = Arrays.asList(new HostAddress("192.168.72.137", 9669),
                     new HostAddress("192.168.72.137", 9670));
             NebulaPool pool = new NebulaPool();
