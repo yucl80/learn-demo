@@ -20,8 +20,11 @@ public class ServiceBImpl extends AbstractServiceB {
 
     private Object obj ;
 
+    private  Object test ;
+
     public ServiceBImpl(){
         b = 100;
+        test = null;
         obj = new Object();
     }
 
@@ -35,10 +38,12 @@ public class ServiceBImpl extends AbstractServiceB {
     }
 
     public int f1(int x){
-        String s= map.get("test");
+        String key = "test";
+        String s= map.get(key);
         System.out.println(s);
         int bb = getB();
-        return a + x + bb;
+        int m = add(100, bb + 10);
+        return a + x + m;
     }
 
     public int getB(){
