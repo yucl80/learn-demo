@@ -3,12 +3,10 @@ package com.yucl.learn.demo.javaparser;
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Node;
-import com.github.javaparser.ast.body.CallableDeclaration;
-import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
-import com.github.javaparser.ast.body.ConstructorDeclaration;
-import com.github.javaparser.ast.body.MethodDeclaration;
+import com.github.javaparser.ast.body.*;
 import com.github.javaparser.ast.comments.Comment;
-import com.github.javaparser.printer.PrettyPrinterConfiguration;
+import com.github.javaparser.printer.configuration.PrettyPrinterConfiguration;
+
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -42,7 +40,7 @@ public class MethodDiff {
         localPpc.setColumnAlignFirstMethodChain(false);
         localPpc.setColumnAlignParameters(false);
         localPpc.setEndOfLineCharacter("");
-        localPpc.setIndent("");
+        //localPpc.setIndent("");
         localPpc.setPrintComments(false);
         localPpc.setPrintJavadoc(false);
 
@@ -91,7 +89,7 @@ public class MethodDiff {
 
     private List<ClassPair> getClasses(String file) {
         try {
-            CompilationUnit cu = JavaParser.parse(new File(file));
+            CompilationUnit cu = new  JavaParser().parse(new File(file)).getResult().get();
             return getClasses(cu, "", false);
         } catch (FileNotFoundException f) {
             throw new RuntimeException("EXCEPTION: Could not find file: "+file);
