@@ -1,4 +1,4 @@
-package com.yucl.learn.demo.antlr4; /***
+package com.yucl.learn.demo.antlr4.java; /***
  * Excerpted from "The Definitive ANTLR 4 Reference",
  * published by The Pragmatic Bookshelf.
  * Copyrights apply to this code. It may not be used to create training material, 
@@ -7,9 +7,9 @@ package com.yucl.learn.demo.antlr4; /***
  * Visit http://www.pragmaticprogrammer.com/titles/tpantlr2 for more book information.
  ***/
 
-import antlr4.Java8Lexer;
-import antlr4.Java8Parser;
-import antlr4.Java8ParserBaseListener;
+import antlr4.java.Java8Lexer;
+import antlr4.java.Java8Parser;
+import antlr4.java.Java8ParserBaseListener;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.Lexer;

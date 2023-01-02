@@ -11,7 +11,7 @@ import java.nio.file.Paths;
 public class Parser {
     public static void main(String[] args) {
         try {
-            String file = "D:\\workspaces\\IdeaProjects\\learn-demo\\learn-javaparser\\src\\main\\java\\com\\yucl\\learn\\demo\\javaparser\\MethodDiff.java";
+            String file = "D:\\MethodDiff.java";
             String contents = new String(Files.readAllBytes(Paths.get(file)));
             test(contents);
         }catch (Exception e){
@@ -23,6 +23,10 @@ public class Parser {
         StringReader reader = new StringReader(contents);
         ParseResult<CompilationUnit> result = new JavaParser().parse(reader);
         if(result.isSuccessful()){
+            CompilationUnit unit = result.getResult().get();
+            unit.getChildNodes().stream().forEach(node -> {
+
+            });
             System.out.println(result.getResult());
         }
 
