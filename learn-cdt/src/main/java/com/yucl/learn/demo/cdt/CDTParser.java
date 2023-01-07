@@ -1,9 +1,7 @@
 package com.yucl.learn.demo.cdt;
 
-import org.eclipse.cdt.core.dom.ast.ASTVisitor;
-import org.eclipse.cdt.core.dom.ast.IASTDeclaration;
-import org.eclipse.cdt.core.dom.ast.IASTStatement;
-import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
+import org.eclipse.cdt.core.dom.ast.*;
+import org.eclipse.cdt.core.dom.ast.cpp.ICPPASTTranslationUnit;
 import org.eclipse.cdt.core.dom.ast.gnu.cpp.GPPLanguage;
 import org.eclipse.cdt.core.index.IIndex;
 import org.eclipse.cdt.core.model.ILanguage;
@@ -13,9 +11,11 @@ import org.eclipse.cdt.core.parser.IParserLogService;
 import org.eclipse.cdt.core.parser.IScannerInfo;
 import org.eclipse.cdt.core.parser.IncludeFileContentProvider;
 import org.eclipse.cdt.core.parser.ScannerInfo;
+import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionCallExpression;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,26 +25,58 @@ public class CDTParser {
         sourcecode = new String(Files.readAllBytes(Paths.get("d:/tmp/code.h")));
         IASTTranslationUnit translationUnit = CDTParser.getIASTTranslationUnit(sourcecode.toCharArray());
 
+        ICPPASTTranslationUnit icppastTranslationUnit = (ICPPASTTranslationUnit)translationUnit;
+
+        Arrays.stream(icppastTranslationUnit.getDeclarations()).forEach(iastDeclaration -> {
+            System.out.println(iastDeclaration.getRawSignature());
+        });
+
         ASTVisitor visitor = new ASTVisitor() {
             @Override
             public int visit(IASTDeclaration declaration) {
                 // When CDT visit a declaration
                // System.out.println("Found a declaration: " + declaration.getRawSignature());
+
                 return PROCESS_CONTINUE;
             }
 
             @Override
+            public int leave(IASTDeclaration declaration) {
+                return super.leave(declaration);
+            }
+
+            @Override
             public int visit(IASTStatement statement) {
-                System.out.println(statement);
+               // System.out.println(statement.getTranslationUnit().getRawSignature());
                 return super.visit(statement);
             }
 
+            @Override
+            public int visit(IASTExpression expression) {
+                if(expression instanceof IASTFunctionCallExpression) {
+                    IASTFunctionCallExpression callExpression =   (IASTFunctionCallExpression)expression;
+                  //  System.out.println(callExpression.getFunctionNameExpression().getRawSignature());
+                }
+                //   System.out.println(expression.getRawSignature() + "    " + expression.getClass());
 
+                return super.visit(expression);
+            }
+
+            @Override
+            public int leave(IASTExpression expression) {
+                return super.leave(expression);
+            }
         };
+
+
+
+
         // Enable CDT to visit declaration
         visitor.shouldVisitDeclarations = true;
+        visitor.shouldVisitExpressions = true;
+        visitor.shouldVisitStatements = true;
         // Adapt visitor with source code unit
-        translationUnit.accept(visitor);
+        icppastTranslationUnit.accept(visitor);
     }
 
     public static IASTTranslationUnit getIASTTranslationUnit(char[] code) throws Exception {
@@ -58,4 +90,7 @@ public class CDTParser {
         IParserLogService log = new DefaultLogService();
         return GPPLanguage.getDefault().getASTTranslationUnit(fc, si, ifcp, idx, options, log);
     }
+
+
+
 }
