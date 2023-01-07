@@ -27,9 +27,9 @@ public class CDTParser {
 
         ICPPASTTranslationUnit icppastTranslationUnit = (ICPPASTTranslationUnit)translationUnit;
 
-        Arrays.stream(icppastTranslationUnit.getDeclarations()).forEach(iastDeclaration -> {
+       /* Arrays.stream(icppastTranslationUnit.getDeclarations()).forEach(iastDeclaration -> {
             System.out.println(iastDeclaration.getRawSignature());
-        });
+        });*/
 
         ASTVisitor visitor = new ASTVisitor() {
             @Override
@@ -55,8 +55,12 @@ public class CDTParser {
             public int visit(IASTExpression expression) {
                 if(expression instanceof IASTFunctionCallExpression) {
                     IASTFunctionCallExpression callExpression =   (IASTFunctionCallExpression)expression;
+                   // expression.getTranslationUnit().getReferences(expre)
                   //  System.out.println(callExpression.getFunctionNameExpression().getRawSignature());
+                    System.out.println(expression.getRawSignature() + "    " +  expression.getExpressionType());
                 }
+
+
                 //   System.out.println(expression.getRawSignature() + "    " + expression.getClass());
 
                 return super.visit(expression);
@@ -72,6 +76,7 @@ public class CDTParser {
 
 
         // Enable CDT to visit declaration
+        visitor.shouldVisitNames = true;
         visitor.shouldVisitDeclarations = true;
         visitor.shouldVisitExpressions = true;
         visitor.shouldVisitStatements = true;
