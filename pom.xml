@@ -10,6 +10,12 @@
   <packaging>pom</packaging>
   <name>learn-demo</name>
 
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+  </properties>
+
   <modules>
     <module>learn-archguard</module>
     <module>learn-antlr4</module>
@@ -19,5 +25,6 @@
       <module>learn-nebula</module>
       <module>learn-hugegraph</module>
       <module>learn-bcel</module>
+      <module>learn-cdt</module>
   </modules>
   </project>
