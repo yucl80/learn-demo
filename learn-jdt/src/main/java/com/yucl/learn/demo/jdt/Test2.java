@@ -26,6 +26,7 @@ public class Test2 {
 
 
         Map<String, String> options = JavaCore.getOptions();
+        options.put(JavaCore.COMPILER_SOURCE, "1.8");
         parser.setCompilerOptions(options);
 
         String unitName = "ServicA.java";
@@ -41,6 +42,8 @@ public class Test2 {
         parser.setSource(str.toCharArray());
 
         CompilationUnit cu = (CompilationUnit) parser.createAST(null);
+
+
 
 
 
@@ -87,7 +90,7 @@ public class Test2 {
 
             @Override
             public boolean visit(MethodInvocation node) {
-                IMethodBinding binding = node.resolveMethodBinding();
+                IMethodBinding methodBinding = node.resolveMethodBinding();
 
                 Expression exp = node.getExpression();
 
@@ -102,8 +105,9 @@ public class Test2 {
                 String qn = "";
                 if (typeBinding != null) {
                     qn = typeBinding.getQualifiedName();
+                    String declaringClassQualifiedName = methodBinding.getDeclaringClass().getQualifiedName();
                 }
-                System.out.println("    " + node.getName().getFullyQualifiedName() + "   " + node.getExpression() + " : " + binding + "    " + qn);
+                System.out.println("    " + node.getName().getFullyQualifiedName() + "   " + node.getExpression() + " : " + methodBinding + "    " + qn);
 
                 return super.visit(node);
             }
@@ -126,7 +130,19 @@ public class Test2 {
                 System.out.println("FieldDeclaration  " + node);
                 return super.visit(node);
             }
+            public boolean visit(VariableDeclarationFragment node) {
+                SimpleName name = node.getName();
 
+               // System.out.println("Declaration of '" + name + "' at line " + cu.getLineNumber(name.getStartPosition()));
+                return true; // set to 'false' to not visit usage info
+            }
+
+            public boolean visit(SimpleName node) {
+
+              //      System.out.println("Usage of '" + node +"(" + node.getFullyQualifiedName()+")' at line " + cu.getLineNumber(node.getStartPosition()));
+
+                return true;
+            }
 
         });
 
