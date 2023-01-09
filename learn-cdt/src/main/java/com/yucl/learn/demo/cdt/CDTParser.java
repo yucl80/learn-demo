@@ -22,7 +22,7 @@ import java.util.Map;
 public class CDTParser {
     public static void main(String[] args) throws Exception {
         String sourcecode = "int a; void test() {a++;}";
-        sourcecode = new String(Files.readAllBytes(Paths.get("d:/tmp/code.h")));
+        sourcecode = new String(Files.readAllBytes(Paths.get("D:\\workspaces\\IdeaProjects\\learn-demo\\learn-cdt\\cpp\\lambda.cpp")));
         IASTTranslationUnit translationUnit = CDTParser.getIASTTranslationUnit(sourcecode.toCharArray());
 
         ICPPASTTranslationUnit icppastTranslationUnit = (ICPPASTTranslationUnit)translationUnit;

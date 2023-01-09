@@ -52,6 +52,7 @@ public class Test2 {
             @Override
             public boolean visit(MethodDeclaration node) {
                 System.out.println(node.resolveBinding());
+
                 return super.visit(node);
             }
 
@@ -95,6 +96,8 @@ public class Test2 {
                 Expression exp = node.getExpression();
 
                 ITypeBinding typeBinding = exp.resolveTypeBinding();
+
+
 
 
                 if (exp instanceof SimpleName) {
