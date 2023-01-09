@@ -4,6 +4,7 @@ import org.eclipse.cdt.core.dom.ast.*;
 import org.eclipse.cdt.core.dom.ast.cpp.ICPPASTTranslationUnit;
 import org.eclipse.cdt.core.dom.ast.gnu.cpp.GPPLanguage;
 import org.eclipse.cdt.core.index.IIndex;
+import org.eclipse.cdt.core.index.IIndexFileLocation;
 import org.eclipse.cdt.core.model.ILanguage;
 import org.eclipse.cdt.core.parser.DefaultLogService;
 import org.eclipse.cdt.core.parser.FileContent;
@@ -12,6 +13,9 @@ import org.eclipse.cdt.core.parser.IScannerInfo;
 import org.eclipse.cdt.core.parser.IncludeFileContentProvider;
 import org.eclipse.cdt.core.parser.ScannerInfo;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionCallExpression;
+import org.eclipse.cdt.internal.core.parser.IMacroDictionary;
+import org.eclipse.cdt.internal.core.parser.scanner.InternalFileContent;
+import org.eclipse.cdt.internal.core.parser.scanner.InternalFileContentProvider;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -87,13 +91,43 @@ public class CDTParser {
     public static IASTTranslationUnit getIASTTranslationUnit(char[] code) throws Exception {
         FileContent fc = FileContent.create("", code);
         Map<String, String> macroDefinitions = new HashMap<>();
-        String[] includeSearchPaths = new String[0];
+        String[] includeSearchPaths = new String[]{"D:\\cdt\\llvm-mingw\\include","D:\\cdt\\llvm-mingw\\include\\c++\\v1"};
         IScannerInfo si = new ScannerInfo(macroDefinitions, includeSearchPaths);
-        IncludeFileContentProvider ifcp = IncludeFileContentProvider.getEmptyFilesProvider();
+        IncludeFileContentProvider emptyFilesProvider = IncludeFileContentProvider.getEmptyFilesProvider();
+
+        IncludeFileContentProvider fileContentProvider = new InternalFileContentProvider() {
+            @Override
+            public InternalFileContent getContentForInclusion(String filePath, IMacroDictionary macroDictionary) {
+               /* InternalFileContent ifc = null;
+                if (!shouldScanInclusionFiles) {
+                    ifc =  new InternalFileContent(filePath, InternalFileContent.InclusionKind.SKIP_FILE);
+                }else {
+                    ifc = FileCache.getInstance().get(filePath);
+                }
+                if (ifc == null) {
+                    ifc = (InternalFileContent) FileContent.createForExternalFileLocation(filePath);
+                    FileCache.getInstance().put(filePath, ifc);
+                }*/
+
+                return (InternalFileContent) FileContent.createForExternalFileLocation(filePath);
+            }
+
+            @Override
+            public InternalFileContent getContentForInclusion(IIndexFileLocation ifl, String astPath) {
+                /*InternalFileContent c = FileCache.getInstance().get(ifl);
+                if (c == null) {
+                    c = (InternalFileContent) FileContent.create(ifl);
+                    FileCache.getInstance().put(ifl, c);
+                }*/
+                return (InternalFileContent) FileContent.create(ifl);
+            }
+        };
+
+
         IIndex idx = null;
         int options = ILanguage.OPTION_IS_SOURCE_UNIT;
         IParserLogService log = new DefaultLogService();
-        return GPPLanguage.getDefault().getASTTranslationUnit(fc, si, ifcp, idx, options, log);
+        return GPPLanguage.getDefault().getASTTranslationUnit(fc, si, emptyFilesProvider, idx, options, log);
     }
 
 
