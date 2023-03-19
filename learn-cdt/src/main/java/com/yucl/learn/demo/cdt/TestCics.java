@@ -6,28 +6,22 @@ import org.eclipse.cdt.core.dom.ast.gnu.cpp.GPPLanguage;
 import org.eclipse.cdt.core.index.IIndex;
 import org.eclipse.cdt.core.index.IIndexFileLocation;
 import org.eclipse.cdt.core.model.ILanguage;
-import org.eclipse.cdt.core.parser.DefaultLogService;
-import org.eclipse.cdt.core.parser.FileContent;
-import org.eclipse.cdt.core.parser.IParserLogService;
-import org.eclipse.cdt.core.parser.IScannerInfo;
-import org.eclipse.cdt.core.parser.IncludeFileContentProvider;
-import org.eclipse.cdt.core.parser.ScannerInfo;
-import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionCallExpression;
+import org.eclipse.cdt.core.parser.*;
 import org.eclipse.cdt.internal.core.parser.IMacroDictionary;
 import org.eclipse.cdt.internal.core.parser.scanner.InternalFileContent;
 import org.eclipse.cdt.internal.core.parser.scanner.InternalFileContentProvider;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CDTParser {
+public class TestCics {
     public static void main(String[] args) throws Exception {
         String sourcecode = "int a; void test() {a++;}";
-        sourcecode = new String(Files.readAllBytes(Paths.get("L:\\workspaces\\IdeaProjects\\learn-demo\\learn-cdt\\cpp\\lambda.cpp")));
-        IASTTranslationUnit translationUnit = CDTParser.getIASTTranslationUnit(sourcecode.toCharArray());
+
+        sourcecode = new String(Files.readAllBytes(Paths.get("L:\\workspaces\\IdeaProjects\\sourcecode\\comnfunc\\bankbus.c")),"GBK");
+        IASTTranslationUnit translationUnit = TestCics.getIASTTranslationUnit(sourcecode.toCharArray());
 
         ICPPASTTranslationUnit icppastTranslationUnit = (ICPPASTTranslationUnit)translationUnit;
 
@@ -39,7 +33,7 @@ public class CDTParser {
             @Override
             public int visit(IASTDeclaration declaration) {
                 // When CDT visit a declaration
-               // System.out.println("Found a declaration: " + declaration.getRawSignature());
+              //  System.out.println("Found a declaration: " + declaration.getRawSignature());
 
                 return PROCESS_CONTINUE;
             }
@@ -60,8 +54,8 @@ public class CDTParser {
                 if(expression instanceof IASTFunctionCallExpression) {
                     IASTFunctionCallExpression callExpression =   (IASTFunctionCallExpression)expression;
                    // expression.getTranslationUnit().getReferences(expre)
-                  //  System.out.println(callExpression.getFunctionNameExpression().getRawSignature());
-                    System.out.println(expression.getRawSignature() + "    " +  expression.getExpressionType());
+                 //  System.out.println(callExpression.getFunctionNameExpression().getRawSignature());
+                   System.out.println(expression.getRawSignature() + "    " +  expression.getExpressionType());
                 }
 
 
@@ -91,7 +85,10 @@ public class CDTParser {
     public static IASTTranslationUnit getIASTTranslationUnit(char[] code) throws Exception {
         FileContent fc = FileContent.create("", code);
         Map<String, String> macroDefinitions = new HashMap<>();
-        String[] includeSearchPaths = new String[]{"L:\\cdt\\llvm-mingw\\include","l:\\cdt\\llvm-mingw\\include\\c++\\v1"};
+       // String[] includeSearchPaths = new String[]{"L:\\cdt\\llvm-mingw\\include","L:\\cdt\\llvm-mingw\\include\\c++\\v1","L:\\cdt\\include","D:\\tools\\tc2\\INCLUDE","l:\\workspaces\\IdeaProjects\\sourcecode\\include","l:\\workspaces\\IdeaProjects\\sourcecode\\db2\\include"};
+
+        String[] includeSearchPaths = new String[]{"l:\\workspaces\\IdeaProjects\\sourcecode\\include","l:\\workspaces\\IdeaProjects\\sourcecode\\db2\\include","L:\\cdt\\include"};
+
         IScannerInfo si = new ScannerInfo(macroDefinitions, includeSearchPaths);
         IncludeFileContentProvider emptyFilesProvider = IncludeFileContentProvider.getEmptyFilesProvider();
 
@@ -127,7 +124,7 @@ public class CDTParser {
         IIndex idx = null;
         int options = ILanguage.OPTION_IS_SOURCE_UNIT;
         IParserLogService log = new DefaultLogService();
-        return GPPLanguage.getDefault().getASTTranslationUnit(fc, si, emptyFilesProvider, idx, options, log);
+        return GPPLanguage.getDefault().getASTTranslationUnit(fc, si, fileContentProvider, idx, options, log);
     }
 
 
