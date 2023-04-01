@@ -11,6 +11,7 @@ void bar() { std::cout << "bar()\n"; }
 class Vehicle {
 public:
     string brand = "Ford";
+    String name = "oo";
 
     void honk() {
         cout << "Tuut, tuut! \n";
@@ -19,6 +20,8 @@ public:
     Vehicle(){
        cout << "Hello World!";
     }
+   private:
+   int age =18;
 };
 
 // Derived class

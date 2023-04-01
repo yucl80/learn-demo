@@ -42,7 +42,7 @@ public class InsertionPointFinder {
                 String def_name = null;
                 if (def.getDeclarator().getName() instanceof ICPPASTQualifiedName) {
                     ICPPASTQualifiedName qname = (ICPPASTQualifiedName) def.getDeclarator().getName();
-                    def_name = qname.getNames()[1].toString();
+                    def_name = qname.getLastName().toString();
                 }
                 else if (def.getDeclarator().getName() instanceof CPPASTName) {
                     def_name = def.getDeclarator().getName().toString();
