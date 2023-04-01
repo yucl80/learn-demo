@@ -26,7 +26,7 @@ import java.util.Map;
 public class CDTParser {
     public static void main(String[] args) throws Exception {
         String sourcecode = "int a; void test() {a++;}";
-        sourcecode = new String(Files.readAllBytes(Paths.get("L:\\workspaces\\IdeaProjects\\learn-demo\\learn-cdt\\cpp\\lambda.cpp")));
+        sourcecode = new String(Files.readAllBytes(Paths.get("D:\\workspaces\\IdeaProjects\\learn-demo\\learn-cdt\\cpp\\lambda.cpp")));
         IASTTranslationUnit translationUnit = CDTParser.getIASTTranslationUnit(sourcecode.toCharArray());
 
         ICPPASTTranslationUnit icppastTranslationUnit = (ICPPASTTranslationUnit)translationUnit;
@@ -91,7 +91,7 @@ public class CDTParser {
     public static IASTTranslationUnit getIASTTranslationUnit(char[] code) throws Exception {
         FileContent fc = FileContent.create("", code);
         Map<String, String> macroDefinitions = new HashMap<>();
-        String[] includeSearchPaths = new String[]{"L:\\cdt\\llvm-mingw\\include","l:\\cdt\\llvm-mingw\\include\\c++\\v1"};
+        String[] includeSearchPaths = new String[]{"D:\\cdt\\llvm-mingw\\include","D:\\cdt\\llvm-mingw\\include\\c++\\v1"};
         IScannerInfo si = new ScannerInfo(macroDefinitions, includeSearchPaths);
         IncludeFileContentProvider emptyFilesProvider = IncludeFileContentProvider.getEmptyFilesProvider();
 

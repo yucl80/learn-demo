@@ -9,10 +9,17 @@ import org.eclipse.cdt.core.index.IIndex;
 import org.eclipse.cdt.core.index.IIndexFileLocation;
 import org.eclipse.cdt.core.model.ILanguage;
 import org.eclipse.cdt.core.parser.*;
+import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTProblemDeclaration;
 import org.eclipse.cdt.internal.core.parser.IMacroDictionary;
 import org.eclipse.cdt.internal.core.parser.scanner.InternalFileContent;
 import org.eclipse.cdt.internal.core.parser.scanner.InternalFileContentProvider;
+import org.eclipse.cdt.internal.formatter.CCodeFormatter;
+import org.eclipse.jface.text.Document;
+import org.eclipse.jface.text.IDocument;
+import org.eclipse.text.edits.TextEdit;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -20,96 +27,91 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TestCics {
+public class TestCics3 {
     public static void main(String[] args) throws Exception {
         String sourcecode = "int a; void test() {a++;}";
 
 
 
-       // sourcecode = new String(Files.readAllBytes(Paths.get("D:\\jzjy\\sourcecode\\comnfunc\\bankbus.c")),"GB2312");
+
+        BufferedReader reader = new BufferedReader(new FileReader("D:\\jzjy\\c\\tbcreate.sqc"));
+        String line = null;
+        StringBuilder sql = new StringBuilder();
+        StringBuilder fileBody = new StringBuilder();
+        boolean find = false;
+        int n=0;
+        while ((line= reader.readLine())!= null){
+            String trimLine = line.trim();
+            if(trimLine.startsWith("EXEC") &&  trimLine.length()>4 && trimLine.substring(4).trim().startsWith("SQL")){
+                System.out.println("find");
+                sql.append(line);
+                find = true;
+                n= n +1;
+            }
+            else if(find){
+                sql.append(line.trim());
+            }
+            if(!find){
+              fileBody.append(line).append("\n");
+            }
+            if(trimLine.endsWith(";") && find){
+                System.out.println(sql.toString());
+                find = false;
+
+                fileBody.append("char * __sql").append(n).append("=\"").append(sql).append("\";\n");
+                sql= new StringBuilder();
+            }
+        }
 
 
-        sourcecode = new String(Files.readAllBytes(Paths.get("D:\\jzjy\\c\\tbcreate.c")), StandardCharsets.UTF_8);
+     //   sourcecode = new String(Files.readAllBytes(Paths.get("D:\\jzjy\\c\\tbcreate.sqc")), StandardCharsets.UTF_8);
+        sourcecode = fileBody.toString();
+       // sourcecode.replaceAll("EXEC SQL\\w;","char* ___sql___=");
 
-        IASTTranslationUnit translationUnit = TestCics.getIASTTranslationUnit(sourcecode.toCharArray());
+
+        org.eclipse.cdt.core.formatter.CodeFormatter formatter = new CCodeFormatter();
+
+
+        TextEdit edit = formatter.format(0,sourcecode,0,sourcecode.length(),0,null);
+
+        IDocument doc=new Document(sourcecode);
+        edit.apply(doc);
+        System.out.println(doc.get());
+
+        IASTTranslationUnit translationUnit = TestCics3.getIASTTranslationUnit(sourcecode.toCharArray());
 
 
         ICPPASTTranslationUnit icppastTranslationUnit = (ICPPASTTranslationUnit)translationUnit;
 
-        Arrays.stream(icppastTranslationUnit.getDeclarations()).forEach(declaration -> {
-            if ((declaration instanceof IASTFunctionDefinition)) {
-                IASTFunctionDefinition ast = (IASTFunctionDefinition) declaration;
-                IScope scope = ast.getScope();
-                try {
-                    System.out.println("### function() - Parent = " + scope.getParent().getScopeName());
-                    System.out.println("### function() - Syntax = " + ast.getSyntax());
-                } catch (DOMException e) {
-                    e.printStackTrace();
-                } catch (ExpansionOverlapsBoundaryException e) {
-                    e.printStackTrace();
-                }
-                ICPPASTFunctionDeclarator typedef = (ICPPASTFunctionDeclarator) ast.getDeclarator();
-                System.out.println("------- typedef: " + typedef.getName());
-            }
-        });
+
 
         ASTVisitor visitor = new ASTVisitor() {
-            @Override
-            public int leave(IASTName name) {
-                return super.leave(name);
-            }
-
-            @Override
-            public int visit(IASTProblem problem) {
-                //System.out.println("problem:"+ problem.getOriginalNode().getRawSignature());
-                return super.visit(problem);
-            }
-
             @Override
             public int visit(IASTName name) {
                 if (name.isReference()) {
                     IBinding b = name.resolveBinding();
                     if(b instanceof  IFunction){
                         IType type = ((IFunction) b).getType();
-                        System.out.println("Referencing " + name + ", type " + ASTTypeUtil.getType(type));
+                      //  System.out.println("Referencing " + name + ", type " + ASTTypeUtil.getType(type));
+
                     }else if(b instanceof ICPPClassType){
-                       // ICPPClassType icppClassType=(ICPPClassType)b;
-                      //  System.out.println(icppClassType);
+                         //  ICPPClassType icppClassType=(ICPPClassType)b;
+                        //  System.out.println(icppClassType);
                     }else{
-                       // System.out.println(b.getName());
+                        // System.out.println(b.getName());
                     }
                 }
-                return ASTVisitor.PROCESS_CONTINUE;
-            }
-
-            @Override
-            public int visit(IASTDeclaration declaration) {
-                // When CDT visit a declaration
-              //  System.out.println("Found a declaration: " + declaration.getRawSignature());
-               // System.out.println("declaration begin: " + declaration.getRawSignature());
-                return PROCESS_CONTINUE;
-            }
-
-            @Override
-            public int leave(IASTDeclaration declaration) {
-               // System.out.println("declaration  end: " + declaration.getRawSignature());
-                return super.leave(declaration);
-            }
-
-            @Override
-            public int visit(IASTStatement statement) {
-               // System.out.println(statement.getTranslationUnit().getRawSignature());
-                return super.visit(statement);
+                return super.visit(name);
             }
 
             @Override
             public int visit(IASTExpression expression) {
                 if(expression instanceof IASTFunctionCallExpression) {
                     IASTFunctionCallExpression callExpression =   (IASTFunctionCallExpression)expression;
-
-                   // expression.getTranslationUnit().getReferences(expre)
-                 //  System.out.println(callExpression.getFunctionNameExpression().getRawSignature());
-                   //System.out.println(expression.getRawSignature() + "    " +  expression.getExpressionType());
+                    IType type =callExpression.getFunctionNameExpression().getExpressionType();
+                    // expression.getTranslationUnit().getReferences(expre)
+                      System.out.println("callExpression:"+callExpression.getFunctionNameExpression()+", type " + ASTTypeUtil.getType(type));
+                    //System.out.println(expression.getRawSignature() + "    " +  expression.getExpressionType());
                 }
 
 
@@ -119,13 +121,11 @@ public class TestCics {
             }
 
             @Override
-            public int leave(IASTExpression expression) {
-                return super.leave(expression);
+            public int visit(IASTStatement statement) {
+
+                return super.visit(statement);
             }
         };
-
-
-
 
         // Enable CDT to visit declaration
         visitor.shouldVisitNames = true;
@@ -134,8 +134,46 @@ public class TestCics {
         visitor.shouldVisitStatements = true;
         visitor.shouldVisitProblems = true;
 
+        Arrays.stream(icppastTranslationUnit.getDeclarations()).forEach(declaration -> {
+            if ((declaration instanceof IASTFunctionDefinition)) {
+
+                IASTFunctionDefinition ast = (IASTFunctionDefinition) declaration;
+                ast.getFileLocation().getStartingLineNumber();
+                //System.out.println("*****************************");
+                //System.out.println(ast.getRawSignature());
+
+                Arrays.stream(ast.getChildren()).forEach(node->{
+                    //System.out.println("################### <<<");
+                   // System.out.println( node.getRawSignature());
+                   // System.out.println("###################>>>>");
+                });
+
+               // System.out.println("*****************************");
+
+                ICPPASTFunctionDeclarator typedef = (ICPPASTFunctionDeclarator) ast.getDeclarator();
+                System.out.println("------- typedef: " + typedef.getName());
+
+
+                ((IASTFunctionDefinition) declaration).getBody().accept(visitor);
+
+
+            }else{
+                if(declaration instanceof CPPASTProblemDeclaration){
+                    CPPASTProblemDeclaration problemDeclaration = (CPPASTProblemDeclaration)declaration;
+                    System.out.println(problemDeclaration.getFileLocation().getStartingLineNumber());
+                    System.out.println(problemDeclaration.getProblem().getMessage());
+                }
+
+            }
+        });
+
+
+
+
+
+
         // Adapt visitor with source code unit
-        icppastTranslationUnit.accept(visitor);
+       // icppastTranslationUnit.accept(visitor);
     }
 
     public static IASTTranslationUnit getIASTTranslationUnit(char[] code) throws Exception {
