@@ -34,7 +34,8 @@ public class CppParser {
     }
 
     static public void parse(String filePath) throws CoreException, IOException {
-        String[] includeSearchPaths = new String[]{"L:\\cygwin64\\usr\\include\\c++\\v1", "L:\\cdt\\linux\\include", "L:\\cdt\\linux\\include\\c++\\4.8.2"};
+       // String[] includeSearchPaths = new String[]{ "/usr/include", "/usr/include/c++/4.8.2","/usr/lib/gcc/x86_64-redhat-linux/4.8.2/include","/usr/include/c++/4.8.2/backward","/usr/include/c++/4.8.2/x86_64-redhat-linux","/usr/local/include"};
+        String[] includeSearchPaths = new String[]{ "L:\\cygwin64\\lib\\gcc\\x86_64-pc-cygwin\\11\\include","L:\\cygwin64\\lib\\gcc\\x86_64-pc-cygwin\\11\\include\\c++","L:\\cygwin64\\lib\\gcc\\x86_64-pc-cygwin\\11\\include\\c++\\backward","L:\\cygwin64\\lib\\gcc\\x86_64-pc-cygwin\\11\\include\\c++\\x86_64-pc-cygwin","L:\\cygwin64\\usr\\include\\w32api","L:\\cygwin64\\usr\\include\\c++\\v1","L:\\cdt\\linux\\include", "L:\\cdt\\linux\\include\\c++\\4.8.2"};
         String sourceCode = new String(Files.readAllBytes(Paths.get(filePath)), "UTF-8");
         IASTTranslationUnit translationUnit = getIASTTranslationUnit(filePath, sourceCode.toCharArray(), includeSearchPaths);
         ICPPASTTranslationUnit icppastTranslationUnit = (ICPPASTTranslationUnit) translationUnit;

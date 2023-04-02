@@ -20,13 +20,13 @@ public class Utils {
     public static String formatCode(String sourceCode) {
         if (sourceCode != null && !sourceCode.isEmpty()) {
             String sourceText = sourceCode.replaceAll("\n[\t|\\s]*[\n]*", "\n");
-            CodeFormatter formatter = new CCodeFormatter();
-            TextEdit edit = formatter.format(CodeFormatter.K_UNKNOWN, sourceText, 0, sourceText.length(), 0, null);
-            IDocument doc = new Document(sourceText);
             try {
+                CodeFormatter formatter = new CCodeFormatter();
+                TextEdit edit = formatter.format(CodeFormatter.K_UNKNOWN, sourceText, 0, sourceText.length(), 0, null);
+                IDocument doc = new Document(sourceText);
                 edit.apply(doc);
                 return doc.get();
-            } catch (BadLocationException e) {
+            } catch (Exception e) {
                 return sourceText;
             }
         } else {
@@ -44,8 +44,7 @@ public class Utils {
         return getHashCode(codeText);
     }
 
-    static String getHashCode(String input)
-    {
+    static String getHashCode(String input) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-1");
             byte[] messageDigest = md.digest(input.getBytes());
