@@ -50,7 +50,7 @@ Car::Car(string x, string y, int z) {
 
 int test() { return 4; }
 
-int main() {
+void fun1(){
     Car myCar;
     myCar.honk();
     cout << myCar.brand + " " + myCar.model;
@@ -73,12 +73,17 @@ int main() {
 
     // (1)
     std::cout << [](int a, int b) { return a * b; }(test(), 5) << std::endl; // 20
+      // (2)
+        auto f2 = [](int a, int b) { return a * b; };
+        std::cout << f2(4, 5) << std::endl;  // 20
 
-    // (2)
-    auto f2 = [](int a, int b) { return a * b; };
-    std::cout << f2(4, 5) << std::endl;  // 20
+        int result = myCar.sum(10);
+        cout << result;
+}
 
-    int result = myCar.sum(10);
-    cout << result;
+int main() {
+
+    fun1();
+
     return 0;
 }
