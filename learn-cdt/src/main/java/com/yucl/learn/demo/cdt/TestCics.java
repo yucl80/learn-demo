@@ -26,8 +26,6 @@ public class TestCics {
 
 
 
-       // sourcecode = new String(Files.readAllBytes(Paths.get("D:\\jzjy\\sourcecode\\comnfunc\\bankbus.c")),"GB2312");
-
 
         sourcecode = new String(Files.readAllBytes(Paths.get("D:\\jzjy\\c\\tbcreate.c")), StandardCharsets.UTF_8);
 

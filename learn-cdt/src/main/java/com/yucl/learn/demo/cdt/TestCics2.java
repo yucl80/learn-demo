@@ -24,12 +24,7 @@ public class TestCics2 {
     public static void main(String[] args) throws Exception {
         String sourcecode = "int a; void test() {a++;}";
 
-
-
-       // sourcecode = new String(Files.readAllBytes(Paths.get("D:\\jzjy\\sourcecode\\comnfunc\\bankbus.c")),"GB2312");
-
-
-        sourcecode = new String(Files.readAllBytes(Paths.get("D:\\jzjy\\c\\tbcreate.sqc")), StandardCharsets.UTF_8);
+        sourcecode = new String(Files.readAllBytes(Paths.get("L:\\workspaces\\IdeaProjects\\sourcecode\\c\\tbcreate.sqc")), StandardCharsets.UTF_8);
 
         IASTTranslationUnit translationUnit = TestCics2.getIASTTranslationUnit(sourcecode.toCharArray());
 

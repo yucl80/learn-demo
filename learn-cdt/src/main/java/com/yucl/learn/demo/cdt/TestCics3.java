@@ -32,8 +32,6 @@ public class TestCics3 {
         String sourcecode = "int a; void test() {a++;}";
 
 
-
-
         BufferedReader reader = new BufferedReader(new FileReader("D:\\jzjy\\c\\tbcreate.sqc"));
         String line = null;
         StringBuilder sql = new StringBuilder();
