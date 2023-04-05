@@ -18,21 +18,62 @@
     </properties>
 
     <dependencies>
-       <!-- <dependency>
+        <dependency>
+            <groupId>org.eclipse.cdt</groupId>
+            <artifactId>org.eclipse.cdt.core</artifactId>
+            <version>7.4.200</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/org.eclipse.cdt.core_7.4.200.202205302218.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.platform</groupId>
+            <artifactId>org.eclipse.core.jobs</artifactId>
+            <version>3.13.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/org.eclipse.core.jobs_3.13.0.v20220512-1935.jar</systemPath>
+        </dependency>
+        <dependency>
             <groupId>org.eclipse.platform</groupId>
             <artifactId>org.eclipse.core.resources</artifactId>
-            <version>3.18.100</version>
-        </dependency>-->
-      <!--  <dependency>
-            <groupId>com.github.mhoffrog.attached</groupId>
-            <artifactId>org.eclipse.cdt.core</artifactId>
-            <version>5.11.0</version>
-        </dependency>-->
-       <!-- <dependency>
-            <groupId>com.ibm.icu</groupId>
-            <artifactId>icu4j</artifactId>
-            <version>71.1</version>
-        </dependency>-->
+            <version>3.17.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/org.eclipse.core.resources_3.17.0.v20220517-0751.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.platform</groupId>
+            <artifactId>org.eclipse.core.runtime</artifactId>
+            <version>3.25.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/org.eclipse.core.runtime_3.25.0.v20220506-1157.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.platform</groupId>
+            <artifactId>org.eclipse.equinox.common</artifactId>
+            <version>3.16.100</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/org.eclipse.equinox.common_3.16.100.v20220315-2327.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.platform</groupId>
+            <artifactId>org.eclipse.text</artifactId>
+            <version>3.12.100</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/org.eclipse.text_3.12.100.v20220506-1404.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.platform</groupId>
+            <artifactId>org.eclipse.osgi</artifactId>
+            <version>3.18.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/org.eclipse.osgi_3.18.0.v20220516-2155.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.service.prefs</artifactId>
+            <version>1.1.2</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/org.osgi.service.prefs_1.1.2.202109301733.jar</systemPath>
+        </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
