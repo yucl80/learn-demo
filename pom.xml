@@ -1,30 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.yucl</groupId>
-  <artifactId>learn-demo</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <packaging>pom</packaging>
-  <name>learn-demo</name>
+    <groupId>com.yucl</groupId>
+    <artifactId>learn-demo</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>learn-demo</name>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
-  </properties>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
 
-  <modules>
-    <module>learn-archguard</module>
-    <module>learn-antlr4</module>
-    <module>learn-sqlparse</module>
-    <module>learn-javaparser</module>
-    <module>learn-jdt</module>
-      <module>learn-nebula</module>
-      <module>learn-hugegraph</module>
-      <module>learn-bcel</module>
-      <module>learn-cdt</module>
-  </modules>
-  </project>
+    <modules>
+        <module>learn-archguard</module>
+        <module>learn-antlr4</module>
+        <module>learn-sqlparse</module>
+        <module>learn-javaparser</module>
+        <module>learn-jdt</module>
+        <module>learn-nebula</module>
+        <module>learn-hugegraph</module>
+        <module>learn-bcel</module>
+        <module>learn-cdt</module>
+        <module>mvnrepository-client</module>
+    </modules>
+</project>
