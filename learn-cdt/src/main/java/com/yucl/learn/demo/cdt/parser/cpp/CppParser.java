@@ -104,6 +104,7 @@ public class CppParser {
 
 
                             Arrays.stream(classType.getDeclaredMethods()).forEach(icppMethod -> {
+
                                 ICPPFunctionType declaredType = icppMethod.getDeclaredType();
                                 String pararmType = Arrays.stream(declaredType.getParameterTypes()).map(paramType -> {
                                     if (paramType instanceof CPPTypedef) {
