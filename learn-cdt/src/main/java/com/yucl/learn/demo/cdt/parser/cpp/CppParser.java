@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 public class CppParser {
     public static void main(String[] args) {
         try {
-            parse("D:\\Users\\yucl\\CLionProjects\\untitled\\main.cpp");
+            parse("L:\\workspaces\\IdeaProjects\\learn-demo\\learn-cdt\\cpp\\main.cpp");
         } catch (CoreException | IOException e) {
             throw new RuntimeException(e);
         }
