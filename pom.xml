@@ -27,5 +27,7 @@
         <module>learn-bcel</module>
         <module>learn-cdt</module>
         <module>mvnrepository-client</module>
+        <module>visio-parse</module>
+        <module>learn-ai</module>
     </modules>
 </project>

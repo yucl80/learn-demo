@@ -28,9 +28,15 @@ public:
     Vehicle(){
         cout << "Hello World!";
     }
+     int fun2(int a);
 private:
     int age =18;
 };
+
+Vehicle::fun2(int a){
+   return a +100;
+}
+
 
 // Derived class
 class Car : public Vehicle {
@@ -87,6 +93,31 @@ void Car::swapNums(int &x, int &y) {
 
 int test() { return 4; }
 
+
+// Base class
+class Animal {
+  public:
+    virtual void animalSound() {
+      cout << "The animal makes a sound \n";
+    }
+};
+
+// Derived class
+class Pig : public Animal {
+  public:
+    void animalSound() {
+      cout << "The pig says: wee wee \n";
+    }
+};
+
+// Derived class
+class Dog : public Animal {
+  public:
+    void animalSound() {
+      cout << "The dog says: bow wow \n";
+    }
+};
+
 int fun1(string str){
 #line 100 "sdfdf"
     Car myCar;
@@ -111,6 +142,17 @@ int fun1(string str){
     int a=100;
     int b=10;
     myCar.swapNums(a,b);
+
+    Animal myAnimal;
+      Pig myPig;
+      Dog myDog;
+      Dog *d = new Dog();
+      d->animalSound();
+      Animal* p = d;
+      p->animalSound();
+      myAnimal.animalSound();
+      myPig.animalSound();
+      myDog.animalSound();
 }
 
 int main() {
