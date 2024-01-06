@@ -30,6 +30,7 @@ public class MethodVisitor extends EmptyVisitor {
 
     @Override
     public void visitGETFIELD(GETFIELD getfield) {
+
         super.visitGETFIELD(getfield);
        // System.out.println(getfield.getName());
     }
@@ -65,6 +66,12 @@ public class MethodVisitor extends EmptyVisitor {
         super.visitPUTSTATIC(putstatic);
         //  System.out.println(putstatic.getName());
 
+    }
+
+    @Override
+    public void visitALOAD(ALOAD aload) {
+       // System.out.println(aload.getName());
+        super.visitALOAD(aload);
     }
 
     public void beforeStart() {
