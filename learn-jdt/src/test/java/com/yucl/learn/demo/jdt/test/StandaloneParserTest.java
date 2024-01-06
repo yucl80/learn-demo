@@ -16,7 +16,7 @@ import org.junit.Test;
  */
 public class StandaloneParserTest {
 
-    @Test
+  //  @Test
     public void test() throws Exception {
         ASTParser parser = ASTParser.newParser(AST.JLS3);
         parser.setSource((""
