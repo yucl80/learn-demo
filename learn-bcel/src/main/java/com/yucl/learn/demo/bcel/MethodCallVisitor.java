@@ -38,7 +38,13 @@ public class MethodCallVisitor extends EmptyVisitor {
     @Override
     public void visitINVOKEINTERFACE(INVOKEINTERFACE invokeinterface) {
         System.out.println("argCount:" + invokeinterface.getArgumentTypes(cpg).length);
+        ReferenceType refType = invokeinterface.getReferenceType(cpg);
+        System.out.println(refType);
         System.out.println(invokeinterface.getReferenceType(cpg));
+        if(refMap.containsKey(refType)){
+            System.out.println("call rpc :" + invokeinterface.getMethodName(cpg) +":" + invokeinterface.getSignature(cpg));
+        }
+
         System.out.println(invokeinterface.getName(cpg));
         super.visitINVOKEINTERFACE(invokeinterface);
     }
