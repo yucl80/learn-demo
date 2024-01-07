@@ -31,7 +31,6 @@ public class MethodCallVisitor extends EmptyVisitor {
 
     @Override
     public void visitINVOKEVIRTUAL(INVOKEVIRTUAL invokevirtual) {
-        System.out.println(invokevirtual.getName());
         super.visitINVOKEVIRTUAL(invokevirtual);
     }
 
