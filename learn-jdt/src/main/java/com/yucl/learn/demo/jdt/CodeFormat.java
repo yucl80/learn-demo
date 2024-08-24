@@ -16,8 +16,9 @@ public class CodeFormat {
         String result;
 
         String javaCode = "public class MyClass{ "
+                + "/** main function */"
                 + "public static void main(String[] args) { "
-                + "System.out.println(\"Hello World\");"
+                + "System.out.println(\"Hello World\"+Math.rand());"
                 + " }"
                 + " }";
 
@@ -35,12 +36,10 @@ public class CodeFormat {
             if (edit != null) {
                 edit.apply(doc);
                 result = doc.get();
-            }
-            else {
+            } else {
                 result = javaCode;
             }
-        }
-        catch (BadLocationException e) {
+        } catch (BadLocationException e) {
             throw new RuntimeException(e);
         }
 

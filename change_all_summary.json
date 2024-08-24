@@ -1,0 +1,19 @@
+{
+    "new_packages": [
+        {
+            "package_name": "",
+            "describe": ""
+        }
+    ],
+    "modefied_packages": [
+        {
+            "package_name": "",
+            "change_describe": ""
+        }
+    ],
+    "removed_packages": [
+        {
+            "package_name": ""
+        }
+    ]
+}

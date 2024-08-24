@@ -1,0 +1,40 @@
+{
+    "new_classes": [
+        {
+            "class_name": "",
+            "new_methods": [
+                {
+                    "method_name": "",
+                    "describe": ""
+                }
+            ]
+        }
+    ],
+    "modefied_classes": [
+        {
+            "class_name": "",
+            "new_methods": [
+                {
+                    "method_name": "",
+                    "describe": ""
+                }
+            ],
+            "modefied_methods": [
+                {
+                    "method_name": "",
+                    "change_describe": ""
+                }
+            ],
+            "removed_methods": [
+                {
+                    "method_name": ""
+                }
+            ]
+        }
+    ],
+    "removed_classes": [
+        {
+            "class_name": ""
+        }
+    ]
+}

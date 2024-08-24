@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.yucl.AppTest" time="0.031" tests="1" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="21"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="GBK"/>
+    <property name="java.class.path" value="D:\workspaces\learn-demo\learn-javaparser\target\test-classes;D:\workspaces\learn-demo\learn-javaparser\target\classes;C:\Users\yuchu\.m2\repository\com\github\javaparser\javaparser-core\3.24.9\javaparser-core-3.24.9.jar;C:\Users\yuchu\.m2\repository\com\github\javaparser\javaparser-symbol-solver-core\3.24.9\javaparser-symbol-solver-core-3.24.9.jar;C:\Users\yuchu\.m2\repository\org\javassist\javassist\3.29.2-GA\javassist-3.29.2-GA.jar;C:\Users\yuchu\.m2\repository\com\google\guava\guava\31.1-jre\guava-31.1-jre.jar;C:\Users\yuchu\.m2\repository\com\google\guava\failureaccess\1.0.1\failureaccess-1.0.1.jar;C:\Users\yuchu\.m2\repository\com\google\guava\listenablefuture\9999.0-empty-to-avoid-conflict-with-guava\listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar;C:\Users\yuchu\.m2\repository\com\google\code\findbugs\jsr305\3.0.2\jsr305-3.0.2.jar;C:\Users\yuchu\.m2\repository\org\checkerframework\checker-qual\3.12.0\checker-qual-3.12.0.jar;C:\Users\yuchu\.m2\repository\com\google\errorprone\error_prone_annotations\2.11.0\error_prone_annotations-2.11.0.jar;C:\Users\yuchu\.m2\repository\com\google\j2objc\j2objc-annotations\1.3\j2objc-annotations-1.3.jar;C:\Users\yuchu\.m2\repository\junit\junit\4.11\junit-4.11.jar;C:\Users\yuchu\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\yuchu\.m2\repository\commons-codec\commons-codec\1.15\commons-codec-1.15.jar;"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="user.timezone" value="Asia/Shanghai"/>
+    <property name="os.name" value="Windows 11"/>
+    <property name="java.vm.specification.version" value="21"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="CN"/>
+    <property name="sun.boot.library.path" value="D:\java\jdk-21.0.1\bin"/>
+    <property name="sun.java.command" value="C:\Users\yuchu\AppData\Local\Temp\surefire4133488139062687229\surefirebooter-20240106082054836_12.jar C:\Users\yuchu\AppData\Local\Temp\surefire4133488139062687229 2024-01-06T08-20-52_975-jvmRun1 surefire-20240106082054836_10tmp surefire_3-20240106082054836_11tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="D:\workspaces\learn-demo\learn-javaparser\target\test-classes;D:\workspaces\learn-demo\learn-javaparser\target\classes;C:\Users\yuchu\.m2\repository\com\github\javaparser\javaparser-core\3.24.9\javaparser-core-3.24.9.jar;C:\Users\yuchu\.m2\repository\com\github\javaparser\javaparser-symbol-solver-core\3.24.9\javaparser-symbol-solver-core-3.24.9.jar;C:\Users\yuchu\.m2\repository\org\javassist\javassist\3.29.2-GA\javassist-3.29.2-GA.jar;C:\Users\yuchu\.m2\repository\com\google\guava\guava\31.1-jre\guava-31.1-jre.jar;C:\Users\yuchu\.m2\repository\com\google\guava\failureaccess\1.0.1\failureaccess-1.0.1.jar;C:\Users\yuchu\.m2\repository\com\google\guava\listenablefuture\9999.0-empty-to-avoid-conflict-with-guava\listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar;C:\Users\yuchu\.m2\repository\com\google\code\findbugs\jsr305\3.0.2\jsr305-3.0.2.jar;C:\Users\yuchu\.m2\repository\org\checkerframework\checker-qual\3.12.0\checker-qual-3.12.0.jar;C:\Users\yuchu\.m2\repository\com\google\errorprone\error_prone_annotations\2.11.0\error_prone_annotations-2.11.0.jar;C:\Users\yuchu\.m2\repository\com\google\j2objc\j2objc-annotations\1.3\j2objc-annotations-1.3.jar;C:\Users\yuchu\.m2\repository\junit\junit\4.11\junit-4.11.jar;C:\Users\yuchu\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\yuchu\.m2\repository\commons-codec\commons-codec\1.15\commons-codec-1.15.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\yuchu"/>
+    <property name="user.language" value="zh"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2023-10-17"/>
+    <property name="java.home" value="D:\java\jdk-21.0.1"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="D:\workspaces\learn-demo\learn-javaparser"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="surefire.real.class.path" value="C:\Users\yuchu\AppData\Local\Temp\surefire4133488139062687229\surefirebooter-20240106082054836_12.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="21.0.1+12-LTS-29"/>
+    <property name="user.name" value="yucl"/>
+    <property name="stdout.encoding" value="GBK"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="localRepository" value="C:\Users\yuchu\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="C:\Users\yuchu\AppData\Local\Temp\"/>
+    <property name="idea.version" value="2023.2.5"/>
+    <property name="java.version" value="21.0.1"/>
+    <property name="user.dir" value="D:\workspaces\learn-demo\learn-javaparser"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="native.encoding" value="GBK"/>
+    <property name="java.library.path" value="D:\java\jdk-21.0.1\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;c:\Users\yuchu\AppData\Local\Programs\Cursor\resources\app\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Users\yuchu\AppData\Local\Microsoft\WindowsApps;c:\Users\yuchu\AppData\Local\Programs\Cursor\resources\app\bin;D:\tools\Git\cmd;D:\tools\Git\mingw64\bin;D:\tools\Git\usr\bin;C:\Users\yuchu\AppData\Local\Microsoft\WindowsApps;D:\java\jdk-11.0.20\bin;;."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="stderr.encoding" value="GBK"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.version" value="21.0.1+12-LTS-29"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="65.0"/>
+  </properties>
+  <testcase name="shouldAnswerWithTrue" classname="com.yucl.AppTest" time="0.001"/>
+</testsuite>
