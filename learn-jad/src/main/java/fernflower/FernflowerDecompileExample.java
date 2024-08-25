@@ -1,3 +1,5 @@
+package fernflower;
+
 import org.jetbrains.java.decompiler.main.DecompilerContext;
 import org.jetbrains.java.decompiler.main.Fernflower;
 import org.jetbrains.java.decompiler.main.decompiler.ConsoleDecompiler;
@@ -5,8 +7,6 @@ import org.jetbrains.java.decompiler.main.decompiler.PrintStreamLogger;
 import org.jetbrains.java.decompiler.main.extern.IBytecodeProvider;
 import org.jetbrains.java.decompiler.main.extern.IFernflowerLogger;
 import org.jetbrains.java.decompiler.main.extern.IResultSaver;
-import org.jetbrains.java.decompiler.struct.ContextUnit;
-import org.jetbrains.java.decompiler.struct.lazy.LazyLoader;
 import org.jetbrains.java.decompiler.util.InterpreterUtil;
 
 import java.io.*;
@@ -69,16 +69,16 @@ public class FernflowerDecompileExample implements IBytecodeProvider, IResultSav
         }
 
         PrintStreamLogger logger = new PrintStreamLogger(System.out);
-//        org.jetbrains.java.decompiler.main.decompiler.ConsoleDecompiler decompiler = new ConsoleDecompiler(destination, mapOptions, logger);
+        org.jetbrains.java.decompiler.main.decompiler.ConsoleDecompiler decompiler = new ConsoleDecompiler(destination, mapOptions);
 
-//        for (File source : lstSources) {
-//            decompiler.addSpace(source, true);
-//        }
-//        for (File library : lstLibraries) {
-//            decompiler.addSpace(library, false);
-//        }
-//
-//        decompiler.decompileContext();
+        for (File source : lstSources) {
+            decompiler.addSpace(source, true);
+        }
+        for (File library : lstLibraries) {
+            decompiler.addSpace(library, false);
+        }
+
+        decompiler.decompileContext();
     }
 
     @SuppressWarnings("UseOfSystemOutOrSystemErr")

@@ -30,5 +30,7 @@
         <module>visio-parse</module>
         <module>learn-ai</module>
         <module>learn-jad</module>
+        <module>learn-tree-sitter</module>
+        <module>learn-spotbugs</module>
     </modules>
 </project>

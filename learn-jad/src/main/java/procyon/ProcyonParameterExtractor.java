@@ -1,12 +1,12 @@
+package procyon;
+
 import com.strobel.assembler.metadata.*;
-import com.strobel.decompiler.DecompilerContext;
-import com.strobel.decompiler.languages.java.ast.*;
 
 import java.util.List;
 
 public class ProcyonParameterExtractor {
     public static void main(String[] args) {
-        String className = "ProcyonParameterExtractor"; // 你要分析的类名
+        String className = "procyon.ProcyonParameterExtractor"; // 你要分析的类名
         String methodName = "main"; // 你要获取参数名的方法名
 
         try {
