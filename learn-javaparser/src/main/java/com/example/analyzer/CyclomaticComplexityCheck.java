@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.toList;
+
 public class CyclomaticComplexityCheck implements Check {
 
     private static final int MAX_COMPLEXITY = 10;
@@ -19,7 +21,7 @@ public class CyclomaticComplexityCheck implements Check {
         {
             cu.findAll(MethodDeclaration.class).forEach(method -> {
                 int complexity = 1; // Start with 1 for the method itself
-                List<Statement> statements = method.getBody().map(BlockStmt::getStatements).flatMap(nl->nl.stream().toList());
+                List<Statement> statements = method.getBody().map(BlockStmt::getStatements).stream().flatMap(List::stream).collect(toList());
                 for (Statement statement : statements) {
                     if (statement instanceof IfStmt || statement instanceof ForStmt || statement instanceof WhileStmt || statement instanceof DoStmt) {
                         complexity++;
