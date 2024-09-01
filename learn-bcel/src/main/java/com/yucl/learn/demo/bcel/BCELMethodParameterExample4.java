@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Stack;
 import java.util.stream.Collectors;
 
-public class BCELMethodParameterExample {
+public class BCELMethodParameterExample4 {
     public static void main(String[] args) throws Exception {
         // 加载目标类
         String className = "com.example.demo.BizServiceImpl";
@@ -25,7 +25,7 @@ public class BCELMethodParameterExample {
         for (Field field : classGen.getFields()) {
             System.out.println(field.getName() + "   " + field.getSignature() + "   " +  field.getGenericSignature());
             if(field.getGenericSignature() != null){
-                System.out.println(field.getName() + "   "  + Arrays.asList(Utility.methodSignatureArgumentTypes('(' +field.getGenericSignature()+")V")));
+                System.out.println(field.getName() + "   "  + parseGenericSignature( field.getGenericSignature()).get(0));
             }else {
                 System.out.println(field.getName() + "   " + getShortName(field.getSignature()));
             }
@@ -34,10 +34,9 @@ public class BCELMethodParameterExample {
         for (Method method : classGen.getMethods()) {
            System.out.println("method :" + method.getName() + "   " + method.getSignature() + "    " + method.getGenericSignature());
            if(method.getGenericSignature() != null) {
-              String[] argumentTypes =  Utility.methodSignatureArgumentTypes(method.getGenericSignature());
-              System.out.println(new ArrayList<>(Arrays.asList(argumentTypes)));
-              String  returnType = Utility.methodSignatureReturnType(method.getGenericSignature());
-              System.out.println(returnType);
+              String[] strx=  Utility.methodSignatureArgumentTypes(method.getGenericSignature());
+              System.out.println(Arrays.asList(strx).stream().collect(Collectors.toList()));
+
            }
             List<String> paramNameList = new ArrayList<>();
             Code code = method.getCode();
@@ -90,7 +89,8 @@ public class BCELMethodParameterExample {
         List<String> argumentTypes = null;
         String genericSignature = method.getGenericSignature();
         if (genericSignature != null) {
-            argumentTypes = Arrays.asList(Utility.methodSignatureArgumentTypes(genericSignature));
+            String args = genericSignature.substring(1, genericSignature.lastIndexOf(')') + 1);
+            argumentTypes = parseGenericSignature(args);
         } else {
             Type[] types = Type.getArgumentTypes(methodSignature);
             argumentTypes = Arrays.stream(types).map(Type::toString).collect(Collectors.toList());
@@ -105,18 +105,43 @@ public class BCELMethodParameterExample {
         }
         String returnType = Type.getReturnType(method.getSignature()).toString();
         if(genericSignature!=null){
-            returnType = Utility.methodSignatureReturnType(genericSignature);
+            String returnTypeString = genericSignature.substring(genericSignature.lastIndexOf(')')+1);
+            returnType = parseGenericSignature(returnTypeString).get(0);
         }
-        if(genericSignature != null && genericSignature.startsWith("<")){
-            String tt = genericSignature.substring(1,genericSignature.indexOf(">"));
-            System.out.println("tt:" + tt);
-            String result = tt.replaceAll(":[^;]+", "").replaceAll(";$", "").replaceAll(";",",");
-            System.out.println("result:" + "<"+result+">");
-            return String.format(" <%s> %s %s(%s);", result, getShortName(returnType), method.getName(), parameters);
-        }else {
-            return String.format("%s %s(%s);", getShortName(returnType), method.getName(), parameters);
-        }
+        return String.format("%s %s(%s);", getShortName(returnType), method.getName(), parameters);
+    }
 
+    private static List<String> parseGenericSignature(String text) {
+        List<String> matches = new ArrayList<>();
+        Stack<Integer> stack = new Stack<>();
+        for (int i = 0; i < text.length(); i++) {
+            char c = text.charAt(i);
+            if (c == 'L' && stack.isEmpty()) {
+                stack.push(i);
+            } else if (c == '<' && text.charAt(i + 1) == 'L') {
+                stack.push(i);
+            } else if (c == ';') {
+                int begin = stack.pop();
+                if (stack.isEmpty()) {
+                    String exp = text.substring(begin + 1, i);
+                    exp = exp.replaceAll("<L", "<");
+                    exp = exp.replaceAll(";>", ">");
+                    exp = exp.replaceAll(";L", ",");
+                    exp = exp.replaceAll("/", ".");
+                    matches.add(exp);
+                }
+            } else {
+                if (stack.isEmpty()) {
+                    Type[] t = Type.getArgumentTypes("(" + c + ")");
+                    Arrays.asList(t).forEach(s -> matches.add(s.toString()));
+                } else {
+                    if (c == 'L' && text.charAt(i - 1) == ';') {
+                        stack.push(i);
+                    }
+                }
+            }
+        }
+        return matches;
     }
 
 

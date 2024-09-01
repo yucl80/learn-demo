@@ -1,3 +1,5 @@
+import com.h3xstream.findsecbugs.FindSecBugsGlobalConfig;
+
 import edu.umd.cs.findbugs.*;  // SpotBugs 的核心包
 import edu.umd.cs.findbugs.config.UserPreferences;
 import edu.umd.cs.findbugs.filter.BugMatcher;
@@ -7,6 +9,7 @@ import edu.umd.cs.findbugs.xml.XMLOutput;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +18,13 @@ import java.util.stream.Collectors;
 public class SpotBugsAnalysis {
     public static void main(String[] args) {
         try {
+//            FindSecBugsGlobalConfig.getInstance();//.setCustomConfigFile(SpotBugsAnalysis.class.getResource("/findbugs-security-plugin.xml"));
+            try {
+                Plugin.addCustomPlugin(new URI("com.h3xstream.findsecbugs"),FindSecBugsGlobalConfig.getInstance().getClass().getClassLoader());
+            } catch (PluginException e) {
+                e.printStackTrace();
+            }
+
             // 创建 Project 实例
             Project project = new Project();
 
@@ -41,7 +51,7 @@ public class SpotBugsAnalysis {
             // 配置 UserPreferences（可以根据需要修改分析选项）
             UserPreferences userPreferences = UserPreferences.createDefaultUserPreferences();
             userPreferences.setEffort(UserPreferences.EFFORT_MAX);
-            userPreferences.setCustomPlugins(Map.of("D:\\java\\repository\\com\\h3xstream\\findsecbugs\\findsecbugs-plugin\\1.13.0\\findsecbugs-plugin-1.13.0.jar", true));
+//            userPreferences.setCustomPlugins(Map.of("D:\\java\\repository\\com\\h3xstream\\findsecbugs\\findsecbugs-plugin\\1.13.0\\findsecbugs-plugin-1.13.0.jar", true));
 
 
             // 初始化 SpotBugs 引擎
@@ -61,10 +71,10 @@ public class SpotBugsAnalysis {
                 findBugs.setDetectorFactoryCollection(detectorFactoryCollection);
 
                 // 打印所有加载的插件，确认 FindSecBugs 是否加载
-//                System.out.println("Loaded plugins:");
-//                for (DetectorFactory factory : detectorFactoryCollection.getFactories()) {
-//                    System.out.println("Plugin: " + factory.getFullName()+ factory.getPlugin().getDetailedDescription());
-//                }
+                System.out.println("Loaded plugins:");
+                for (DetectorFactory factory : detectorFactoryCollection.getFactories()) {
+                    System.out.println("Plugin: " + factory.getFullName()+ factory.getPlugin().getDetailedDescription());
+                }
 
                 findBugs.execute();
 
