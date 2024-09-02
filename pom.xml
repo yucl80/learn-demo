@@ -32,5 +32,6 @@
         <module>learn-jad</module>
         <module>learn-tree-sitter</module>
         <module>learn-spotbugs</module>
+        <module>learn-soot</module>
     </modules>
 </project>
