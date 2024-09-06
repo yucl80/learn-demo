@@ -18,9 +18,9 @@ public class DeprecatedAPICheck implements Check {
             cu.findAll(MethodCallExpr.class).forEach(methodCall -> {
                 try {
                     ResolvedMethodDeclaration resolvedMethod = methodCall.resolve();
-                    if (resolvedMethod.isDeprecated()) {
-                        result.addIssue("Usage of deprecated API: " + resolvedMethod.getQualifiedSignature() + " at line " + methodCall.getBegin().get().line);
-                    }
+//                    if (resolvedMethod.isDeprecated()) {
+//                        result.addIssue("Usage of deprecated API: " + resolvedMethod.getQualifiedSignature() + " at line " + methodCall.getBegin().get().line);
+//                    }
                 } catch (Exception e) {
                     // Handle the resolution error gracefully
                 }

@@ -10,6 +10,7 @@ import edu.umd.cs.findbugs.xml.XMLOutput;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -19,11 +20,13 @@ public class SpotBugsAnalysis {
     public static void main(String[] args) {
         try {
 //            FindSecBugsGlobalConfig.getInstance();//.setCustomConfigFile(SpotBugsAnalysis.class.getResource("/findbugs-security-plugin.xml"));
-            try {
-                Plugin.addCustomPlugin(new URI("com.h3xstream.findsecbugs"),FindSecBugsGlobalConfig.getInstance().getClass().getClassLoader());
-            } catch (PluginException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                Plugin.addCustomPlugin(new URL("com.h3xstream.findsecbugs"),FindSecBugsGlobalConfig.getInstance().getClass().getClassLoader());
+//            } catch (PluginException e) {
+//                e.printStackTrace();
+//            }
+
+            System.out.println("call");
 
             // 创建 Project 实例
             Project project = new Project();
@@ -47,33 +50,50 @@ public class SpotBugsAnalysis {
             // 创建 BugCollector 实例用于收集 Bug 信息
             BugCollectionBugReporter reporter = new BugCollectionBugReporter(project);
             reporter.setPriorityThreshold(Priorities.NORMAL_PRIORITY);
-
+            DetectorFactoryCollection detectorFactoryCollection = DetectorFactoryCollection.instance();
             // 配置 UserPreferences（可以根据需要修改分析选项）
             UserPreferences userPreferences = UserPreferences.createDefaultUserPreferences();
             userPreferences.setEffort(UserPreferences.EFFORT_MAX);
 //            userPreferences.setCustomPlugins(Map.of("D:\\java\\repository\\com\\h3xstream\\findsecbugs\\findsecbugs-plugin\\1.13.0\\findsecbugs-plugin-1.13.0.jar", true));
 
+            PluginLoader pluginLoader =PluginLoader.getPluginLoader(new File("D:\\java\\repository\\com\\h3xstream\\findsecbugs\\findsecbugs-plugin\\1.13.0\\findsecbugs-plugin-1.13.0.jar").toURL(),Thread.currentThread().getContextClassLoader(),true,false);
+            Plugin plugin = pluginLoader.loadPlugin();
+
+//            System.out.println(plugin.getBugPatterns());
+//            plugin.getDetectorFactories().forEach(System.out::println);
+//            plugin.setGloballyEnabled(true);
+
+            userPreferences.setCustomPlugins(Map.of("com.h3xstream.findsecbugs", true));
+
+            System.out.println(plugin);
 
             // 初始化 SpotBugs 引擎
             try(FindBugs2 findBugs = new FindBugs2();) {
                 findBugs.setProject(project);
                 findBugs.setBugReporter(reporter);
                 findBugs.setUserPreferences(userPreferences);
-                DetectorFactoryCollection detectorFactoryCollection = DetectorFactoryCollection.instance();
+//                DetectorFactoryCollection.resetInstance(detectorFactoryCollection);
+                findBugs.setDetectorFactoryCollection( new DetectorFactoryCollection());
 
-                Plugin plugin =  detectorFactoryCollection.getPluginById("com.h3xstream.findsecbugs");
-                if(plugin != null) {
-                    System.out.println("Plugin loaded: "+plugin.getDetailedDescription());
+
+                Plugin plugin2 =  detectorFactoryCollection.getPluginById("com.h3xstream.findsecbugs");
+                if(plugin2 != null) {
+                    System.out.println("Plugin loaded: "+plugin2.getDetailedDescription());
                 }else{
                     System.out.println("Plugin not loaded");
                 }
 
-                findBugs.setDetectorFactoryCollection(detectorFactoryCollection);
+
+
+//                findBugs.setDetectorFactoryCollection(plugin.getDetectorFactories());
 
                 // 打印所有加载的插件，确认 FindSecBugs 是否加载
                 System.out.println("Loaded plugins:");
                 for (DetectorFactory factory : detectorFactoryCollection.getFactories()) {
-                    System.out.println("Plugin: " + factory.getFullName()+ factory.getPlugin().getDetailedDescription());
+                    String des="Plugin: " + factory.getFullName()+ factory.getPlugin().getDetailedDescription();
+                    if(des.contains("Sql")) {
+                        System.out.println("Plugin: " + factory.getFullName() + factory.getPlugin().getDetailedDescription());
+                    }
                 }
 
                 findBugs.execute();
@@ -83,14 +103,14 @@ public class SpotBugsAnalysis {
                 List<BugInstance> bugs = new ArrayList<>(bugCollection.getCollection());
 
                 // 打印 Bug 信息
-                for (BugInstance bug : bugs) {
-                    System.out.println(bug.getBugPattern().getType() + ": " + bug.getMessage());
-                }
+//                for (BugInstance bug : bugs) {
+//                    System.out.println(bug.getBugPattern().getType() + ": " + bug.getMessage());
+//                }
             }
 
 
         } catch (Exception e) {
-           // e.printStackTrace();
+           e.printStackTrace();
         }
     }
 }
