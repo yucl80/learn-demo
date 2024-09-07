@@ -12,22 +12,24 @@ public class DeprecatedAPICheck implements Check {
 
     @Override
     public void performCheck(CompilationUnit cu, CheckResult result) {
-        try {
-            
+        cu.findAll(MethodCallExpr.class).forEach(methodCall -> {
+            try {
+                ResolvedMethodDeclaration resolvedMethod = methodCall.resolve();
 
-            cu.findAll(MethodCallExpr.class).forEach(methodCall -> {
-                try {
-                    ResolvedMethodDeclaration resolvedMethod = methodCall.resolve();
-//                    if (resolvedMethod.isDeprecated()) {
-//                        result.addIssue("Usage of deprecated API: " + resolvedMethod.getQualifiedSignature() + " at line " + methodCall.getBegin().get().line);
-//                    }
-                } catch (Exception e) {
-                    // Handle the resolution error gracefully
-                }
-            });
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//                boolean isDeprecated = resolvedMethod.getAnnotations().stream()
+//                        .anyMatch(a -> a.getName().getIdentifier().equals("Deprecated"));
+//
+//                if (isDeprecated) {
+//                    result.addIssue("Usage of deprecated API: " +
+//                            resolvedMethod.getQualifiedSignature() + " at line " +
+//                            methodCall.getBegin().get().line);
+//                }
+            } catch (Exception e) {
+//                result.addIssue("Failed to resolve method: " + methodCall.getNameAsString() +
+//                        " at line " + methodCall.getBegin().get().line + ". Error: " + e.getMessage());
+            }
+        });
     }
+
 }
+

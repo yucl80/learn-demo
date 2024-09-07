@@ -21,6 +21,7 @@ public class Main {
         }
 
         List<String> enabledChecks = Arrays.asList(config.getProperty("checks.enabled").split(","));
+
         CustomAnalyzer analyzer = new CustomAnalyzer(codePath, enabledChecks);
         CheckResult result = analyzer.runChecks();
 
