@@ -1,1 +1,4 @@
 SpotBugsAnalysis.class
+SpotBugsManualPluginLoader.class
+CommandLine.class
+SpotBugsPluginExample.class

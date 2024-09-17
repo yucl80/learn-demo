@@ -1,72 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.yucl.learn.demo.jdt.test.InsertStatementsTest" time="0.062" tests="1" errors="0" skipped="0" failures="1">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.yucl.learn.demo.jdt.test.InsertStatementsTest" time="0.092" tests="1" errors="0" skipped="0" failures="1">
   <properties>
-    <property name="java.specification.version" value="21"/>
+    <property name="java.specification.version" value="17"/>
     <property name="sun.cpu.isalist" value="amd64"/>
     <property name="sun.jnu.encoding" value="GBK"/>
-    <property name="java.class.path" value="D:\workspaces\learn-demo\learn-jdt\target\test-classes;D:\workspaces\learn-demo\learn-jdt\target\classes;C:\Users\yuchu\.m2\repository\org\eclipse\jdt\org.eclipse.jdt.core\3.32.0\org.eclipse.jdt.core-3.32.0.jar;C:\Users\yuchu\.m2\repository\org\eclipse\platform\org.eclipse.core.resources\3.18.100\org.eclipse.core.resources-3.18.100.jar;C:\Users\yuchu\.m2\repository\org\eclipse\platform\org.eclipse.core.expressions\3.8.200\org.eclipse.core.expressions-3.8.200.jar;C:\Users\yuchu\.m2\repository\org\eclipse\platform\org.eclipse.osgi\3.18.200\org.eclipse.osgi-3.18.200.jar;C:\Users\yuchu\.m2\repository\org\eclipse\platform\org.eclipse.core.runtime\3.26.100\org.eclipse.core.runtime-3.26.100.jar;C:\Users\yuchu\.m2\repository\org\eclipse\platform\org.eclipse.equinox.common\3.17.0\org.eclipse.equinox.common-3.17.0.jar;C:\Users\yuchu\.m2\repository\org\eclipse\platform\org.eclipse.core.jobs\3.13.200\org.eclipse.core.jobs-3.13.200.jar;C:\Users\yuchu\.m2\repository\org\eclipse\platform\org.eclipse.equinox.registry\3.11.200\org.eclipse.equinox.registry-3.11.200.jar;C:\Users\yuchu\.m2\repository\org\eclipse\platform\org.eclipse.equinox.preferences\3.10.100\org.eclipse.equinox.preferences-3.10.100.jar;C:\Users\yuchu\.m2\repository\org\osgi\org.osgi.service.prefs\1.1.2\org.osgi.service.prefs-1.1.2.jar;C:\Users\yuchu\.m2\repository\org\osgi\osgi.annotation\8.0.1\osgi.annotation-8.0.1.jar;C:\Users\yuchu\.m2\repository\org\eclipse\platform\org.eclipse.core.contenttype\3.8.200\org.eclipse.core.contenttype-3.8.200.jar;C:\Users\yuchu\.m2\repository\org\eclipse\platform\org.eclipse.equinox.app\1.6.200\org.eclipse.equinox.app-1.6.200.jar;C:\Users\yuchu\.m2\repository\org\eclipse\platform\org.eclipse.core.filesystem\1.9.500\org.eclipse.core.filesystem-1.9.500.jar;C:\Users\yuchu\.m2\repository\org\eclipse\platform\org.eclipse.text\3.12.300\org.eclipse.text-3.12.300.jar;C:\Users\yuchu\.m2\repository\org\eclipse\platform\org.eclipse.core.commands\3.10.300\org.eclipse.core.commands-3.10.300.jar;C:\Users\yuchu\.m2\repository\junit\junit\4.13.2\junit-4.13.2.jar;C:\Users\yuchu\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;"/>
+    <property name="java.class.path" value="D:\workspaces\learn-demo\learn-jdt\target\test-classes;D:\workspaces\learn-demo\learn-jdt\target\classes;D:\java\repository\org\eclipse\jdt\org.eclipse.jdt.core\3.32.0\org.eclipse.jdt.core-3.32.0.jar;D:\java\repository\org\eclipse\platform\org.eclipse.core.resources\3.18.100\org.eclipse.core.resources-3.18.100.jar;D:\java\repository\org\eclipse\platform\org.eclipse.core.expressions\3.8.200\org.eclipse.core.expressions-3.8.200.jar;D:\java\repository\org\eclipse\platform\org.eclipse.osgi\3.18.200\org.eclipse.osgi-3.18.200.jar;D:\java\repository\org\eclipse\platform\org.eclipse.core.runtime\3.26.100\org.eclipse.core.runtime-3.26.100.jar;D:\java\repository\org\eclipse\platform\org.eclipse.equinox.common\3.17.0\org.eclipse.equinox.common-3.17.0.jar;D:\java\repository\org\eclipse\platform\org.eclipse.core.jobs\3.13.200\org.eclipse.core.jobs-3.13.200.jar;D:\java\repository\org\eclipse\platform\org.eclipse.equinox.registry\3.11.200\org.eclipse.equinox.registry-3.11.200.jar;D:\java\repository\org\eclipse\platform\org.eclipse.equinox.preferences\3.10.100\org.eclipse.equinox.preferences-3.10.100.jar;D:\java\repository\org\osgi\org.osgi.service.prefs\1.1.2\org.osgi.service.prefs-1.1.2.jar;D:\java\repository\org\osgi\osgi.annotation\8.0.1\osgi.annotation-8.0.1.jar;D:\java\repository\org\eclipse\platform\org.eclipse.core.contenttype\3.8.200\org.eclipse.core.contenttype-3.8.200.jar;D:\java\repository\org\eclipse\platform\org.eclipse.equinox.app\1.6.200\org.eclipse.equinox.app-1.6.200.jar;D:\java\repository\org\eclipse\platform\org.eclipse.core.filesystem\1.9.500\org.eclipse.core.filesystem-1.9.500.jar;D:\java\repository\org\eclipse\platform\org.eclipse.text\3.12.300\org.eclipse.text-3.12.300.jar;D:\java\repository\org\eclipse\platform\org.eclipse.core.commands\3.10.300\org.eclipse.core.commands-3.10.300.jar;D:\java\repository\junit\junit\4.13.2\junit-4.13.2.jar;D:\java\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="user.variant" value=""/>
     <property name="java.vendor.url" value="https://java.oracle.com/"/>
-    <property name="user.timezone" value="Asia/Shanghai"/>
+    <property name="user.timezone" value="Asia/Singapore"/>
     <property name="os.name" value="Windows 11"/>
-    <property name="java.vm.specification.version" value="21"/>
+    <property name="java.vm.specification.version" value="17"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="CN"/>
-    <property name="sun.boot.library.path" value="D:\java\jdk-21.0.1\bin"/>
-    <property name="sun.java.command" value="C:\Users\yuchu\AppData\Local\Temp\surefire17809741258355678538\surefirebooter-20240106082056118_15.jar C:\Users\yuchu\AppData\Local\Temp\surefire17809741258355678538 2024-01-06T08-20-52_975-jvmRun1 surefire-20240106082056118_13tmp surefire_4-20240106082056118_14tmp"/>
+    <property name="sun.boot.library.path" value="D:\java\jdk-17.0.9\bin"/>
+    <property name="sun.java.command" value="C:\Users\yuchu\AppData\Local\Temp\surefire5083431307074587493\surefirebooter-20240912163936376_15.jar C:\Users\yuchu\AppData\Local\Temp\surefire5083431307074587493 2024-09-12T16-39-16_400-jvmRun1 surefire-20240912163936376_13tmp surefire_4-20240912163936376_14tmp"/>
     <property name="jdk.debug" value="release"/>
-    <property name="surefire.test.class.path" value="D:\workspaces\learn-demo\learn-jdt\target\test-classes;D:\workspaces\learn-demo\learn-jdt\target\classes;C:\Users\yuchu\.m2\repository\org\eclipse\jdt\org.eclipse.jdt.core\3.32.0\org.eclipse.jdt.core-3.32.0.jar;C:\Users\yuchu\.m2\repository\org\eclipse\platform\org.eclipse.core.resources\3.18.100\org.eclipse.core.resources-3.18.100.jar;C:\Users\yuchu\.m2\repository\org\eclipse\platform\org.eclipse.core.expressions\3.8.200\org.eclipse.core.expressions-3.8.200.jar;C:\Users\yuchu\.m2\repository\org\eclipse\platform\org.eclipse.osgi\3.18.200\org.eclipse.osgi-3.18.200.jar;C:\Users\yuchu\.m2\repository\org\eclipse\platform\org.eclipse.core.runtime\3.26.100\org.eclipse.core.runtime-3.26.100.jar;C:\Users\yuchu\.m2\repository\org\eclipse\platform\org.eclipse.equinox.common\3.17.0\org.eclipse.equinox.common-3.17.0.jar;C:\Users\yuchu\.m2\repository\org\eclipse\platform\org.eclipse.core.jobs\3.13.200\org.eclipse.core.jobs-3.13.200.jar;C:\Users\yuchu\.m2\repository\org\eclipse\platform\org.eclipse.equinox.registry\3.11.200\org.eclipse.equinox.registry-3.11.200.jar;C:\Users\yuchu\.m2\repository\org\eclipse\platform\org.eclipse.equinox.preferences\3.10.100\org.eclipse.equinox.preferences-3.10.100.jar;C:\Users\yuchu\.m2\repository\org\osgi\org.osgi.service.prefs\1.1.2\org.osgi.service.prefs-1.1.2.jar;C:\Users\yuchu\.m2\repository\org\osgi\osgi.annotation\8.0.1\osgi.annotation-8.0.1.jar;C:\Users\yuchu\.m2\repository\org\eclipse\platform\org.eclipse.core.contenttype\3.8.200\org.eclipse.core.contenttype-3.8.200.jar;C:\Users\yuchu\.m2\repository\org\eclipse\platform\org.eclipse.equinox.app\1.6.200\org.eclipse.equinox.app-1.6.200.jar;C:\Users\yuchu\.m2\repository\org\eclipse\platform\org.eclipse.core.filesystem\1.9.500\org.eclipse.core.filesystem-1.9.500.jar;C:\Users\yuchu\.m2\repository\org\eclipse\platform\org.eclipse.text\3.12.300\org.eclipse.text-3.12.300.jar;C:\Users\yuchu\.m2\repository\org\eclipse\platform\org.eclipse.core.commands\3.10.300\org.eclipse.core.commands-3.10.300.jar;C:\Users\yuchu\.m2\repository\junit\junit\4.13.2\junit-4.13.2.jar;C:\Users\yuchu\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;"/>
+    <property name="surefire.test.class.path" value="D:\workspaces\learn-demo\learn-jdt\target\test-classes;D:\workspaces\learn-demo\learn-jdt\target\classes;D:\java\repository\org\eclipse\jdt\org.eclipse.jdt.core\3.32.0\org.eclipse.jdt.core-3.32.0.jar;D:\java\repository\org\eclipse\platform\org.eclipse.core.resources\3.18.100\org.eclipse.core.resources-3.18.100.jar;D:\java\repository\org\eclipse\platform\org.eclipse.core.expressions\3.8.200\org.eclipse.core.expressions-3.8.200.jar;D:\java\repository\org\eclipse\platform\org.eclipse.osgi\3.18.200\org.eclipse.osgi-3.18.200.jar;D:\java\repository\org\eclipse\platform\org.eclipse.core.runtime\3.26.100\org.eclipse.core.runtime-3.26.100.jar;D:\java\repository\org\eclipse\platform\org.eclipse.equinox.common\3.17.0\org.eclipse.equinox.common-3.17.0.jar;D:\java\repository\org\eclipse\platform\org.eclipse.core.jobs\3.13.200\org.eclipse.core.jobs-3.13.200.jar;D:\java\repository\org\eclipse\platform\org.eclipse.equinox.registry\3.11.200\org.eclipse.equinox.registry-3.11.200.jar;D:\java\repository\org\eclipse\platform\org.eclipse.equinox.preferences\3.10.100\org.eclipse.equinox.preferences-3.10.100.jar;D:\java\repository\org\osgi\org.osgi.service.prefs\1.1.2\org.osgi.service.prefs-1.1.2.jar;D:\java\repository\org\osgi\osgi.annotation\8.0.1\osgi.annotation-8.0.1.jar;D:\java\repository\org\eclipse\platform\org.eclipse.core.contenttype\3.8.200\org.eclipse.core.contenttype-3.8.200.jar;D:\java\repository\org\eclipse\platform\org.eclipse.equinox.app\1.6.200\org.eclipse.equinox.app-1.6.200.jar;D:\java\repository\org\eclipse\platform\org.eclipse.core.filesystem\1.9.500\org.eclipse.core.filesystem-1.9.500.jar;D:\java\repository\org\eclipse\platform\org.eclipse.text\3.12.300\org.eclipse.text-3.12.300.jar;D:\java\repository\org\eclipse\platform\org.eclipse.core.commands\3.10.300\org.eclipse.core.commands-3.10.300.jar;D:\java\repository\junit\junit\4.13.2\junit-4.13.2.jar;D:\java\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="C:\Users\yuchu"/>
     <property name="user.language" value="zh"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="java.version.date" value="2023-10-17"/>
-    <property name="java.home" value="D:\java\jdk-21.0.1"/>
+    <property name="java.home" value="D:\java\jdk-17.0.9"/>
     <property name="file.separator" value="\"/>
     <property name="basedir" value="D:\workspaces\learn-demo\learn-jdt"/>
     <property name="java.vm.compressedOopsMode" value="Zero based"/>
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\yuchu\AppData\Local\Temp\surefire17809741258355678538\surefirebooter-20240106082056118_15.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\yuchu\AppData\Local\Temp\surefire5083431307074587493\surefirebooter-20240912163936376_15.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
-    <property name="java.runtime.version" value="21.0.1+12-LTS-29"/>
-    <property name="user.name" value="yucl"/>
-    <property name="stdout.encoding" value="GBK"/>
+    <property name="java.runtime.version" value="17.0.9+11-LTS-201"/>
+    <property name="user.name" value="yuchu"/>
     <property name="path.separator" value=";"/>
     <property name="os.version" value="10.0"/>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
-    <property name="file.encoding" value="UTF-8"/>
+    <property name="file.encoding" value="GBK"/>
     <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
-    <property name="localRepository" value="C:\Users\yuchu\.m2\repository"/>
+    <property name="localRepository" value="D:\java\repository"/>
     <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
     <property name="java.io.tmpdir" value="C:\Users\yuchu\AppData\Local\Temp\"/>
-    <property name="idea.version" value="2023.2.5"/>
-    <property name="java.version" value="21.0.1"/>
+    <property name="java.version" value="17.0.9"/>
     <property name="user.dir" value="D:\workspaces\learn-demo\learn-jdt"/>
     <property name="os.arch" value="amd64"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
     <property name="sun.os.patch.level" value=""/>
     <property name="native.encoding" value="GBK"/>
-    <property name="java.library.path" value="D:\java\jdk-21.0.1\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;c:\Users\yuchu\AppData\Local\Programs\Cursor\resources\app\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Users\yuchu\AppData\Local\Microsoft\WindowsApps;c:\Users\yuchu\AppData\Local\Programs\Cursor\resources\app\bin;D:\tools\Git\cmd;D:\tools\Git\mingw64\bin;D:\tools\Git\usr\bin;C:\Users\yuchu\AppData\Local\Microsoft\WindowsApps;D:\java\jdk-11.0.20\bin;;."/>
+    <property name="java.library.path" value="D:\java\jdk-17.0.9\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;D:\tools\miniconda3;D:\tools\miniconda3\Library\mingw-w64\bin;D:\tools\miniconda3\Library\usr\bin;D:\tools\miniconda3\Library\bin;D:\tools\miniconda3\Scripts;D:\tools\miniconda3\bin;D:\tools\miniconda3\condabin;C:\VulkanSDK\1.3.290.0\Bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit;C:\ProgramData\chocolatey\bin;D:\tools\miniconda3;D:\tools\miniconda3\Library\mingw-w64\bin;D:\tools\miniconda3\Library\usr\bin;D:\tools\miniconda3\Library\bin;D:\tools\miniconda3\Scripts;C:\Users\yuchu\AppData\Local\Microsoft\WindowsApps;D:\java\jdk-17.0.9\bin;C:\Users\yuchu\AppData\Local\Programs\Ollama;D:\tools\PortableGit\bin;D:\tools\PortableGit\mingw64\bin;D:\java\apache-maven-3.9.6\bin;D:\tools\VSCode\bin;C:\VulkanSDK\1.3.290.0\Bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\ProgramData\chocolatey\bin;D:\tools\miniconda3;D:\tools\miniconda3\Library\mingw-w64\bin;D:\tools\miniconda3\Library\usr\bin;D:\tools\miniconda3\Library\bin;D:\tools\miniconda3\Scripts;C:\Users\yuchu\AppData\Local\Microsoft\WindowsApps;D:\java\jdk-17.0.9\bin;C:\Users\yuchu\AppData\Local\Programs\Ollama;D:\tools\PortableGit\bin;D:\tools\PortableGit\mingw64\bin;D:\java\apache-maven-3.9.6\bin;D:\tools\VSCode\bin;."/>
     <property name="java.vm.info" value="mixed mode, sharing"/>
-    <property name="stderr.encoding" value="GBK"/>
     <property name="java.vendor" value="Oracle Corporation"/>
-    <property name="java.vm.version" value="21.0.1+12-LTS-29"/>
+    <property name="java.vm.version" value="17.0.9+11-LTS-201"/>
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
-    <property name="java.class.version" value="65.0"/>
+    <property name="java.class.version" value="61.0"/>
   </properties>
-  <testcase name="test" classname="com.yucl.learn.demo.jdt.test.InsertStatementsTest" time="0.01">
+  <testcase name="test" classname="com.yucl.learn.demo.jdt.test.InsertStatementsTest" time="0.009">
     <failure message="This test must be run inside an OSGi framework" type="java.lang.AssertionError"><![CDATA[java.lang.AssertionError: This test must be run inside an OSGi framework
 	at org.junit.Assert.fail(Assert.java:89)
 	at org.junit.Assert.assertTrue(Assert.java:42)
 	at org.junit.Assert.assertNotNull(Assert.java:713)
 	at com.yucl.learn.demo.jdt.test.InsertStatementsTest.test(InsertStatementsTest.java:43)
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
 	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
 	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
 	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)

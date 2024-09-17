@@ -1,5 +1,0 @@
-# Created at 2024-01-06T08:17:30.360
-Boot Manifest-JAR contains absolute paths in classpath 'D:\workspaces\learn-demo\learn-archguard\target\test-classes'
-Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
-'other' has different root
-

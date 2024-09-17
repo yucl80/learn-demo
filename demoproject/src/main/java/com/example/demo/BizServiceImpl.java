@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * test class
+ */
 public class BizServiceImpl {
     private String name;
 
@@ -27,6 +30,9 @@ public class BizServiceImpl {
     }
 
     static List<String>  testfunc(){
+        /**
+         * create new array
+         */
         return new ArrayList<>();
     }
 
@@ -34,7 +40,14 @@ public class BizServiceImpl {
 
     }
 
+    /**
+     * 打招呼函数
+     * @param name
+     * @param a
+     * @return
+     */
     HashMap<String,BizDto> hello(String name, int a){
+        //new map
         return new HashMap<>();
     }
 }

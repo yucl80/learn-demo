@@ -22,9 +22,27 @@
         <dependency>
             <groupId>io.github.bonede</groupId>
             <artifactId>tree-sitter</artifactId>
-            <version>0.22.6.1</version>
-            <scope>runtime</scope>
+            <version>0.23.0</version>
         </dependency>
+        <!-- add json parser -->
+        <dependency>
+            <groupId>io.github.bonede</groupId>
+            <artifactId>tree-sitter-json</artifactId>
+            <version>0.21.0a</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.bonede</groupId>
+            <artifactId>tree-sitter-java</artifactId>
+            <version>0.21.0a</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.bonede</groupId>
+            <artifactId>tree-sitter-python</artifactId>
+            <version>0.21.0a</version>
+        </dependency>
+
 
     </dependencies>
 

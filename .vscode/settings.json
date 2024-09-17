@@ -1,5 +1,6 @@
 {
     "java.compile.nullAnalysis.mode": "automatic",
     "CodeGPT.apiKey": "LM Studio",
-    "CodeGPT.Autocomplete.provider": "Ollama - deepseek-coder:base"
+    "CodeGPT.Autocomplete.provider": "Ollama - deepseek-coder:base",
+    "java.configuration.updateBuildConfiguration": "automatic"
 }

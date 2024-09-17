@@ -1,15 +1,17 @@
 -------------------------------------------------------------------------------
 Test set: com.yucl.learn.demo.jdt.test.InsertStatementsTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.062 s <<< FAILURE! - in com.yucl.learn.demo.jdt.test.InsertStatementsTest
-com.yucl.learn.demo.jdt.test.InsertStatementsTest.test  Time elapsed: 0.01 s  <<< FAILURE!
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.092 s <<< FAILURE! -- in com.yucl.learn.demo.jdt.test.InsertStatementsTest
+com.yucl.learn.demo.jdt.test.InsertStatementsTest.test -- Time elapsed: 0.009 s <<< FAILURE!
 java.lang.AssertionError: This test must be run inside an OSGi framework
 	at org.junit.Assert.fail(Assert.java:89)
 	at org.junit.Assert.assertTrue(Assert.java:42)
 	at org.junit.Assert.assertNotNull(Assert.java:713)
 	at com.yucl.learn.demo.jdt.test.InsertStatementsTest.test(InsertStatementsTest.java:43)
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
 	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
 	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
 	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
