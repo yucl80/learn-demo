@@ -5,11 +5,11 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Arrays;
+import java.util.*;
 
 public final class TreeSitterCursor {
     public static void main(String[] args) throws IOException {
-        String javaSource = Files.readString(Paths.get("D:\\workspaces\\learn-demo\\demoproject\\src\\main\\java\\com\\example\\demo\\BizServiceImpl.java"));
+        String javaSource = Files.readString(Paths.get("D:\\workspaces\\learn-demo\\demoproject\\src\\main\\java\\com\\example\\demo\\NeClass.java"));
         TSParser parser = new TSParser();
         TSLanguage java = new org.treesitter.TreeSitterJava();
         parser.setLanguage(java);
@@ -17,41 +17,67 @@ public final class TreeSitterCursor {
         TSTree tree = parser.parseStringEncoding(null, javaSource, TSInputEncoding.TSInputEncodingUTF8);
         TSNode rootNode = tree.getRootNode();
         TSTreeCursor cursor = new TSTreeCursor(rootNode);
-        String type = cursor.currentNode().getType();
-
-        if (cursor.gotoFirstChild()) {
-            walk(cursor, sourceBytes);
-        }
-
+        Map<String,List<String>> classInfoMap= new HashMap<>();
+        walk(cursor, sourceBytes,classInfoMap,"");
+        System.out.println(classInfoMap);
     }
 
-    private static void walk(TSTreeCursor cursor, byte[] sourceBytes) {
+    private static void walk(TSTreeCursor cursor, byte[] sourceBytes, Map<String,List<String>> classInfoMap,String outerClass) {
         if (cursor.gotoFirstChild()) {
-            walk(cursor, sourceBytes);
-            cursor.gotoParent();
-        }
-        while (cursor.gotoNextSibling()) {
-            if ( cursor.currentFieldName()!=null) {
-                System.out.println(cursor.currentFieldName() + " , " + cursor.currentNode().getType());
+            while (cursor.gotoNextSibling()) {
+                TSNode currentNode = cursor.currentNode();
+                if ("class_declaration".equals(currentNode.getType())) {
+                    String className = getNodeText(currentNode.getChildByFieldName("name"), sourceBytes);
+                    System.out.println("Class Name: " + className);
+                    if(! outerClass.isEmpty()){
+                        className = outerClass + "." + className;
+                    }
+                    System.out.println(className);
+                    classInfoMap.put(className,new ArrayList<>());
+                    TSNode classBody = currentNode.getChildByFieldName("body");
+                    if(!classBody.isNull()) {
+                        walk(new TSTreeCursor(classBody), sourceBytes,classInfoMap,className);
+                    }
+                } else if ("method_declaration".equals(currentNode.getType())) {
+                    String methodName = getNodeText(currentNode.getChildByFieldName("name"), sourceBytes);
+                    classInfoMap.get(outerClass).add(buildMethodSignature(currentNode,sourceBytes));
 
-                System.out.println(getNodeText(cursor.currentNode(), sourceBytes));
+                }
+
             }
 
-//            TSNode currentNode = cursor.currentNode();
-//            if (currentNode.getType().equals("class_declaration")){
-//                for(int i=0;i< currentNode.getChildCount();i++){
-//                    TSNode node = currentNode.getChild(i);
-//                    System.out.println(node.getType() + "   " + getNodeText(node,sourceBytes));
-//                }
-//                String className = getNodeText(currentNode, sourceBytes);
-//                System.out.println("Class Name: " + className);
-//            }else if(currentNode.getType().equals("method_declaration")){
-//                String className = getNodeText(currentNode.getChild(0), sourceBytes);
-//                System.out.println("Method Name: " + className);
-//            }
-            walk(cursor, sourceBytes);
         }
     }
+
+    private static String buildMethodSignature(TSNode methodDeclaration, byte[] sourceBytes) {
+        TSNode returnTypeNode = methodDeclaration.getChildByFieldName("type");
+        String returnType = returnTypeNode.isNull() ? "void" : getNodeText(returnTypeNode, sourceBytes);
+
+        TSNode methodNameNode = methodDeclaration.getChildByFieldName("name");
+        String methodName = getNodeText(methodNameNode, sourceBytes);
+
+        List<String> parameters = new ArrayList<>();
+        TSNode parametersNode = methodDeclaration.getChildByFieldName("parameters");
+        if (!parametersNode.isNull()) {
+            TSTreeCursor cursor = new TSTreeCursor(parametersNode);
+            if (cursor.gotoFirstChild()) {
+                while (cursor.gotoNextSibling()) {
+                    TSNode parameter = cursor.currentNode();
+                    TSNode typeNode = parameter.getChildByFieldName("type");
+                    if (!typeNode.isNull()) {
+                        String type = getNodeText(typeNode, sourceBytes);
+                        TSNode nameNode = parameter.getChildByFieldName("name");
+                        String name = nameNode.isNull() ? "" : getNodeText(nameNode, sourceBytes);
+                        parameters.add(type + " " + name);
+                    }
+                }
+            }
+        }
+
+        return returnType + " " + methodName + "(" + String.join(",", parameters) + ")";
+    }
+
+
 
     private static String getNodeText(TSNode node, byte[] sourceBytes) {
         int startByte = node.getStartByte();
