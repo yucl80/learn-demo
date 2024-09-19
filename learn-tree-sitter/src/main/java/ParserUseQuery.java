@@ -18,7 +18,7 @@ public final class ParserUseQuery {
                 "  name: (identifier) @class_name\n" +
                 "  body: (class_body\n" +
                 "    (method_declaration\n" +
-                "      name: (identifier) @method_name" +
+//                "      name: (identifier) @method_name" +
 //                "      body: (block) @method_body" +
                 "      )  @method_declaration)" +
                 ")");
@@ -50,8 +50,8 @@ public final class ParserUseQuery {
     }
 
     private static MethodEntity buildMethodEntity(TSQueryMatch match, byte[] sourceBytes) {
-        String methodName = getNodeText(match.getCaptures()[2].getNode(), sourceBytes);
         TSNode methodDeclarationNode = match.getCaptures()[1].getNode();
+        String methodName = getNodeText(methodDeclarationNode.getChildByFieldName("name"), sourceBytes);
         String methodSignature= buildMethodSignature(methodDeclarationNode, sourceBytes);
         String methodBody = getNodeText(methodDeclarationNode.getChildByFieldName("body"), sourceBytes);
         return new MethodEntity(methodName,methodSignature,methodBody, methodDeclarationNode.getStartByte(),methodDeclarationNode.getEndByte());
