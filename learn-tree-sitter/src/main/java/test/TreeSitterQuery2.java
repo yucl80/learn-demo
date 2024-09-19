@@ -1,3 +1,5 @@
+package test;
+
 import org.treesitter.*;
 
 import java.io.IOException;

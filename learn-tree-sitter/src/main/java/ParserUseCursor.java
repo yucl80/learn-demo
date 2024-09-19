@@ -1,13 +1,12 @@
 import org.treesitter.*;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 
-public final class TreeSitterCursor {
+public final class ParserUseCursor {
     public static void main(String[] args) throws IOException {
         String javaSource = Files.readString(Paths.get("D:\\workspaces\\learn-demo\\demoproject\\src\\main\\java\\com\\example\\demo\\NeClass.java"));
         TSParser parser = new TSParser();
@@ -17,30 +16,30 @@ public final class TreeSitterCursor {
         TSTree tree = parser.parseStringEncoding(null, javaSource, TSInputEncoding.TSInputEncodingUTF8);
         TSNode rootNode = tree.getRootNode();
         TSTreeCursor cursor = new TSTreeCursor(rootNode);
-        Map<String,List<String>> classInfoMap= new HashMap<>();
-        walk(cursor, sourceBytes,classInfoMap,"");
+        Map<String, List<String>> classInfoMap = new HashMap<>();
+        walk(cursor, sourceBytes, classInfoMap, "");
         System.out.println(classInfoMap);
     }
 
-    private static void walk(TSTreeCursor cursor, byte[] sourceBytes, Map<String,List<String>> classInfoMap,String outerClass) {
+    private static void walk(TSTreeCursor cursor, byte[] sourceBytes, Map<String, List<String>> classInfoMap, String outerClass) {
         if (cursor.gotoFirstChild()) {
             while (cursor.gotoNextSibling()) {
                 TSNode currentNode = cursor.currentNode();
                 if ("class_declaration".equals(currentNode.getType())) {
                     String className = getNodeText(currentNode.getChildByFieldName("name"), sourceBytes);
                     System.out.println("Class Name: " + className);
-                    if(! outerClass.isEmpty()){
+                    if (!outerClass.isEmpty()) {
                         className = outerClass + "." + className;
                     }
                     System.out.println(className);
-                    classInfoMap.put(className,new ArrayList<>());
+                    classInfoMap.put(className, new ArrayList<>());
                     TSNode classBody = currentNode.getChildByFieldName("body");
-                    if(!classBody.isNull()) {
-                        walk(new TSTreeCursor(classBody), sourceBytes,classInfoMap,className);
+                    if (!classBody.isNull()) {
+                        walk(new TSTreeCursor(classBody), sourceBytes, classInfoMap, className);
                     }
                 } else if ("method_declaration".equals(currentNode.getType())) {
                     String methodName = getNodeText(currentNode.getChildByFieldName("name"), sourceBytes);
-                    classInfoMap.get(outerClass).add(buildMethodSignature(currentNode,sourceBytes));
+                    classInfoMap.get(outerClass).add(buildMethodSignature(currentNode, sourceBytes));
 
                 }
 
@@ -76,7 +75,6 @@ public final class TreeSitterCursor {
 
         return returnType + " " + methodName + "(" + String.join(",", parameters) + ")";
     }
-
 
 
     private static String getNodeText(TSNode node, byte[] sourceBytes) {

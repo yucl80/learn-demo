@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public final class TreeSitterQuery {
+public final class ParserUseQuery {
     public static void main(String[] args) throws IOException {
         String javaSource = Files.readString(Paths.get("D:\\workspaces\\learn-demo\\demoproject\\src\\main\\java\\com\\example\\demo\\NeClass.java"));
         TSParser parser = new TSParser();
@@ -17,7 +17,13 @@ public final class TreeSitterQuery {
         byte[] sourceBytes = javaSource.getBytes(StandardCharsets.UTF_8);
         TSTree tree = parser.parseStringEncoding(null, javaSource, TSInputEncoding.TSInputEncodingUTF8);
         TSQuery tsQuery = new TSQuery(java, "(class_declaration\n" +
-                "  name: (identifier) @name.definition.class) @definition.class");
+                "  name: (identifier) @class_name\n" +
+                "  body: (class_body\n" +
+                "    (method_definition\n" +
+                "      type: @type" +
+                "      name: (identifier) @method_name)" +
+                "      parameters: @parameters" +
+                "      body: @method_body))");
         TSQueryCursor queryCursor = new TSQueryCursor();
         queryCursor.exec(tsQuery, tree.getRootNode());
         TSQueryCursor.TSMatchIterator matchIterator = queryCursor.getMatches();
@@ -43,8 +49,26 @@ public final class TreeSitterQuery {
         }
     }
 
-
     private static void listMethods(TSLanguage java, TSNode node, byte[] sourceBytes) {
+        TSQuery tsQuery = new TSQuery(java, "(method_declaration) @definition.method");
+        TSQueryCursor queryCursor = new TSQueryCursor();
+        queryCursor.exec(tsQuery, node);
+        TSQueryCursor.TSMatchIterator matchIterator = queryCursor.getMatches();
+        while (matchIterator.hasNext()) {
+            TSQueryMatch match = matchIterator.next();
+            TSNode methodDeclarationNode = match.getCaptures()[0].getNode();
+            TSNode parent = methodDeclarationNode.getParent().getParent();
+            if (TSNode.eq(node, parent)) {
+                String methodBody = getNodeText(methodDeclarationNode, sourceBytes);
+                System.out.println("--" + buildMethodSignature(methodDeclarationNode, sourceBytes));
+                System.out.println(methodBody);
+            }
+
+        }
+    }
+
+
+    private static void listMethods2(TSLanguage java, TSNode node, byte[] sourceBytes) {
         TSQuery tsQuery = new TSQuery(java, "(method_declaration) @definition.method");
         TSQueryCursor queryCursor = new TSQueryCursor();
         queryCursor.exec(tsQuery, node);

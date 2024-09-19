@@ -14,8 +14,8 @@ public class ServicA {
     @Autowired
     CityMapper cityMapper;
 
-    @Autowired
-    CommentRepository commentRepository;
+
+
     public int cacl(int a, int b) {
         Thread t = new Thread(() -> serviceB.add(a, b));
         t.start();
@@ -26,7 +26,7 @@ public class ServicA {
         }
         String str = cityMapper.findByState("test");
 
-        commentRepository.countTotalCommentsByYear();
+
 
         Arrays.asList(1,2,3,4).stream().map(m -> serviceB.add(m,m)).map(s->s.toString()).map(Utils::hello).forEach(v->{
             System.out.println(v);

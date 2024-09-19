@@ -30,7 +30,7 @@ public class NeClass {
             }
         }
 
-        class C {
+        class C extends A {
             public void d(){
                 System.out.println("d()");
             }

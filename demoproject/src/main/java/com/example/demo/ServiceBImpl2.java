@@ -9,6 +9,11 @@ public class ServiceBImpl2 extends AbstractServiceB {
         return super.add(a, b);
     }
 
+    @Override
+    public String getName() {
+        return "ServiceBImpl_2";
+    }
+
     public String hello() {
         return "ok";
     }
