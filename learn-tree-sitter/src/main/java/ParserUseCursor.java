@@ -16,22 +16,20 @@ public final class ParserUseCursor {
         TSTree tree = parser.parseStringEncoding(null, javaSource, TSInputEncoding.TSInputEncodingUTF8);
         TSNode rootNode = tree.getRootNode();
         TSTreeCursor cursor = new TSTreeCursor(rootNode);
-        Map<String, List<String>> classInfoMap = new HashMap<>();
+        Map<String, List<MethodEntity>> classInfoMap = new HashMap<>();
         walk(cursor, sourceBytes, classInfoMap, "");
         System.out.println(classInfoMap);
     }
 
-    private static void walk(TSTreeCursor cursor, byte[] sourceBytes, Map<String, List<String>> classInfoMap, String outerClass) {
+    private static void walk(TSTreeCursor cursor, byte[] sourceBytes, Map<String, List<MethodEntity>> classInfoMap, String outerClass) {
         if (cursor.gotoFirstChild()) {
             while (cursor.gotoNextSibling()) {
                 TSNode currentNode = cursor.currentNode();
                 if ("class_declaration".equals(currentNode.getType())) {
                     String className = getNodeText(currentNode.getChildByFieldName("name"), sourceBytes);
-                    System.out.println("Class Name: " + className);
                     if (!outerClass.isEmpty()) {
                         className = outerClass + "." + className;
                     }
-                    System.out.println(className);
                     classInfoMap.put(className, new ArrayList<>());
                     TSNode classBody = currentNode.getChildByFieldName("body");
                     if (!classBody.isNull()) {
@@ -39,14 +37,17 @@ public final class ParserUseCursor {
                     }
                 } else if ("method_declaration".equals(currentNode.getType())) {
                     String methodName = getNodeText(currentNode.getChildByFieldName("name"), sourceBytes);
-                    classInfoMap.get(outerClass).add(buildMethodSignature(currentNode, sourceBytes));
-
+                    String methodBody =  getNodeText(currentNode.getChildByFieldName("body"), sourceBytes);
+                    String methodSignature= buildMethodSignature(currentNode, sourceBytes);
+                    MethodEntity methodEntity =new  MethodEntity(methodName,methodSignature,methodBody, currentNode.getStartByte(),currentNode.getEndByte());
+                    classInfoMap.get(outerClass).add(methodEntity);
                 }
 
             }
 
         }
     }
+
 
     private static String buildMethodSignature(TSNode methodDeclaration, byte[] sourceBytes) {
         TSNode returnTypeNode = methodDeclaration.getChildByFieldName("type");

@@ -4,9 +4,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public final class ParserUseQuery {
     public static void main(String[] args) throws IOException {
@@ -19,14 +17,15 @@ public final class ParserUseQuery {
         TSQuery tsQuery = new TSQuery(java, "(class_declaration\n" +
                 "  name: (identifier) @class_name\n" +
                 "  body: (class_body\n" +
-                "    (method_definition\n" +
-                "      type: @type" +
-                "      name: (identifier) @method_name)" +
-                "      parameters: @parameters" +
-                "      body: @method_body))");
+                "    (method_declaration\n" +
+                "      name: (identifier) @method_name" +
+//                "      body: (block) @method_body" +
+                "      )  @method_declaration)" +
+                ")");
         TSQueryCursor queryCursor = new TSQueryCursor();
         queryCursor.exec(tsQuery, tree.getRootNode());
         TSQueryCursor.TSMatchIterator matchIterator = queryCursor.getMatches();
+        Map<String,List<MethodEntity>> classMap = new HashMap<>();
         while (matchIterator.hasNext()) {
             TSQueryMatch match = matchIterator.next();
             TSNode node = match.getCaptures()[0].getNode();
@@ -43,48 +42,21 @@ public final class ParserUseQuery {
             }
             if (!foundClassInMethod) {
                 String className = String.join(".", sb);
-                System.out.println("class name:" + className);
-                listMethods(java, match.getCaptures()[0].getNode(), sourceBytes);
+                MethodEntity methodEntity = buildMethodEntity(match, sourceBytes);
+                classMap.computeIfAbsent(className, k->new ArrayList<>()).add(methodEntity);
             }
         }
+        System.out.println(classMap);
     }
 
-    private static void listMethods(TSLanguage java, TSNode node, byte[] sourceBytes) {
-        TSQuery tsQuery = new TSQuery(java, "(method_declaration) @definition.method");
-        TSQueryCursor queryCursor = new TSQueryCursor();
-        queryCursor.exec(tsQuery, node);
-        TSQueryCursor.TSMatchIterator matchIterator = queryCursor.getMatches();
-        while (matchIterator.hasNext()) {
-            TSQueryMatch match = matchIterator.next();
-            TSNode methodDeclarationNode = match.getCaptures()[0].getNode();
-            TSNode parent = methodDeclarationNode.getParent().getParent();
-            if (TSNode.eq(node, parent)) {
-                String methodBody = getNodeText(methodDeclarationNode, sourceBytes);
-                System.out.println("--" + buildMethodSignature(methodDeclarationNode, sourceBytes));
-                System.out.println(methodBody);
-            }
-
-        }
+    private static MethodEntity buildMethodEntity(TSQueryMatch match, byte[] sourceBytes) {
+        String methodName = getNodeText(match.getCaptures()[2].getNode(), sourceBytes);
+        TSNode methodDeclarationNode = match.getCaptures()[1].getNode();
+        String methodSignature= buildMethodSignature(methodDeclarationNode, sourceBytes);
+        String methodBody = getNodeText(methodDeclarationNode.getChildByFieldName("body"), sourceBytes);
+        return new MethodEntity(methodName,methodSignature,methodBody, methodDeclarationNode.getStartByte(),methodDeclarationNode.getEndByte());
     }
 
-
-    private static void listMethods2(TSLanguage java, TSNode node, byte[] sourceBytes) {
-        TSQuery tsQuery = new TSQuery(java, "(method_declaration) @definition.method");
-        TSQueryCursor queryCursor = new TSQueryCursor();
-        queryCursor.exec(tsQuery, node);
-        TSQueryCursor.TSMatchIterator matchIterator = queryCursor.getMatches();
-        while (matchIterator.hasNext()) {
-            TSQueryMatch match = matchIterator.next();
-            TSNode methodDeclarationNode = match.getCaptures()[0].getNode();
-            TSNode parent = methodDeclarationNode.getParent().getParent();
-            if (TSNode.eq(node, parent)) {
-                String methodBody = getNodeText(methodDeclarationNode, sourceBytes);
-                System.out.println("--" + buildMethodSignature(methodDeclarationNode, sourceBytes));
-                System.out.println(methodBody);
-            }
-
-        }
-    }
 
     private static String buildMethodSignature(TSNode methodDeclaration, byte[] sourceBytes) {
         TSNode returnTypeNode = methodDeclaration.getChildByFieldName("type");
