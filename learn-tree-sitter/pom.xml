@@ -43,6 +43,12 @@
             <version>0.21.0a</version>
         </dependency>
 
+        <dependency>
+            <groupId>io.github.bonede</groupId>
+            <artifactId>tree-sitter-sql</artifactId>
+            <version>gh-pages-a</version>
+        </dependency>
+
 
     </dependencies>
 
