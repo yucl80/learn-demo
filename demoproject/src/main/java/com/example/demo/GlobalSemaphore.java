@@ -31,7 +31,7 @@ public class GlobalSemaphore {
             "    count = count + 1\n" +
             "end\n" +
             "\n" +
-            "local used = tonumber(redis.call('GET', KEYS[1]) or 0)  -- 确保用于比较的是数字\n" +
+            "local used = tonumber(redis.call('GET', KEYS[1]) or 0) \n" +
             "\n" +
             "if used < count then\n" +
             "    redis.call('SET', KEYS[1], count)\n" +
