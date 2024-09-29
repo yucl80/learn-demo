@@ -7,6 +7,18 @@
         <groupId>com.yucl</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>9</source>
+                    <target>9</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>learn-ai</artifactId>
@@ -30,22 +42,27 @@
         <dependency>
             <groupId>io.qdrant</groupId>
             <artifactId>client</artifactId>
-            <version>1.9.1</version>
+            <version>1.11.0</version>
         </dependency>
         <dependency>
             <groupId>io.grpc</groupId>
             <artifactId>grpc-protobuf</artifactId>
-            <version>1.59.0</version>
-        </dependency>
-        <dependency>
-            <groupId>io.grpc</groupId>
-            <artifactId>grpc-services</artifactId>
-            <version>1.59.0</version>
+            <version>1.65.1</version>
         </dependency>
         <dependency>
             <groupId>io.grpc</groupId>
             <artifactId>grpc-stub</artifactId>
-            <version>1.59.0</version>
+            <version>1.65.1</version>
+        </dependency>
+        <dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>grpc-netty-shaded</artifactId>
+            <version>1.65.1</version>
+        </dependency>
+        <dependency>
+            <groupId>io.milvus</groupId>
+            <artifactId>milvus-sdk-java</artifactId>
+            <version>2.4.4</version>
         </dependency>
         <dependency>
             <groupId>com.google.guava</groupId>

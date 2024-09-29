@@ -64,6 +64,7 @@ public class GlobalSemaphore {
                 }
                 // 检查超时
                 if (System.currentTimeMillis() - startTime > semGetTimeout) {
+                    check();
                     throw new RuntimeException("Failed to acquire semaphore within timeout");
                 }
                 Thread.sleep((long) Math.random() * 1000);  // 等待重试
@@ -104,7 +105,7 @@ public class GlobalSemaphore {
     public static void main(String[] args) {
         GlobalSemaphore semaphore = new GlobalSemaphore(5, 50000, 1000);  // 设置最大并发数和超时时间
         // 创建多个线程模拟并发请求
-//        semaphore.check();
+
         for (int i = 0; i < 6; i++) {
             new Thread(() -> {
                 String threadId = null;
