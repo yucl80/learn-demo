@@ -57,13 +57,13 @@ public class ModelLockService {
                     "  count = count +1\n" +
                     " end\n" +
                     "end\n" +
-                    "if tonumber(redis.call('GET',KEYS[1])) < tonumber(ARGV[1]) then\n" +
+                    "if tonumber(redis.call('GET',KEYS[1]) or 0) < tonumber(ARGV[1]) then\n" +
                     " redis.call('del',KEYS[3])\n " +
                     "end\n" +
                     "return count";
 
     public ModelLockService(int maxConcurrent,  int retryInterval) {
-        this.jedisPool = new JedisPool("192.168.85.130", 6379);
+        this.jedisPool = new JedisPool("192.168.85.132", 6379);
         this.maxConcurrent = maxConcurrent;
         this.retryInterval = retryInterval;
 
@@ -177,7 +177,7 @@ public class ModelLockService {
         lockService.leakRecoverLuaScript(modelKey, 10000);
 
         long acquireTimeout = 1000000;
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 19; i++) {
             new Thread(() -> {
                 String requestId = null;
 
@@ -195,7 +195,7 @@ public class ModelLockService {
                 }
             }).start();
         }
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 12; i++) {
             new Thread(() -> {
                 String requestId = null;
                 try {

@@ -27,7 +27,7 @@ public class QdrantClientDemo {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         QdrantClient client = new QdrantClient(
                 QdrantGrpcClient.newBuilder(
-                                "192.168.85.130",
+                                "192.168.85.132",
                                 6334,
                                 false
                         )
