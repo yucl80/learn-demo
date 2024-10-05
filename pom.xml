@@ -34,6 +34,6 @@
         <module>learn-tree-sitter</module>
         <module>learn-spotbugs</module>
         <module>learn-soot</module>
-
+        <module>learn-sootup</module>
     </modules>
 </project>

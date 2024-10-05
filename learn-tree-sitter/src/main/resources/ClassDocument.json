@@ -1,0 +1,15 @@
+{
+  "class_hash": "unique_class_hash",
+  "project_id": "unique_project_hash",
+  "branch_name": "feature_branch",
+  "class_name": "com.example.ClassName",
+  "parent_class_hash": "parent_class_hash",
+  "method_hashes": [
+    "method_hash_1",
+    "method_hash_2"
+  ],
+  "dependencies": [
+    "external_class_reference"
+  ],
+  "timestamp": "last_modified_timestamp"
+}

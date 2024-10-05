@@ -1,0 +1,13 @@
+{
+  "method_hash": "unique_method_hash",
+  "class_hash": "class_hash_1",
+  "project_id": "unique_project_hash",
+  "branch_name": "feature_branch",
+  "method_signature": "public void exampleMethod(int param)",
+  "method_body": "method body as text or AST",
+  "invoked_methods": [
+    "method_hash_2",
+    "method_hash_3"
+  ],
+  "timestamp": "last_modified_timestamp"
+}
