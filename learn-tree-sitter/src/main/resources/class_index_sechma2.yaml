@@ -8,16 +8,16 @@ index_id: class_index_a
 doc_mapping:
   field_mappings:
     - name: class_hash
-      type: string
+      type: text
       tokenizer: default
       record: position
       stored: true
     - name: project_id
-      type: string
+      type: text
       tokenizer: default
       stored: true
     - name: branch_name
-      type: string
+      type: text
       tokenizer: default
       stored: true
     - name: class_name
@@ -25,15 +25,15 @@ doc_mapping:
       tokenizer: default
       stored: true
     - name: parent_class_hash
-      type: string
+      type: text
       tokenizer: default
       stored: true
     - name: method_hashes
-      type: array<string>
+      type: array<text>
       tokenizer: default
       stored: true
     - name: dependencies
-      type: array<string>
+      type: array<text>
       tokenizer: default
       stored: true
 
