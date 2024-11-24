@@ -8,6 +8,7 @@ public class TestStringHash {
 
         rst = DigestUtils.sha1Hex("asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasfdasfasdfasfdasdfafdasfdasfdasfdasdfasdf");
         System.out.println(rst.length());
+        
         rst =  DigestUtils.md5Hex("asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasfdasfasdfasfdasdfafdasfdasfdasfdasdfasdf");
         System.out.println(rst.length());
 

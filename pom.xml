@@ -18,6 +18,7 @@
     </properties>
 
     <modules>
+        <module>learn-agent</module>
         <module>learn-archguard</module>
         <module>learn-antlr4</module>
         <module>learn-sqlparse</module>
