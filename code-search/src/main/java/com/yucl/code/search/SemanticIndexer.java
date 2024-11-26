@@ -1,11 +1,11 @@
 package com.yucl.code.search;
 
-
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.List;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class SemanticIndexer {
@@ -78,5 +78,21 @@ public class SemanticIndexer {
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
         JSONObject responseBody = new JSONObject(response.body());
         return responseBody.getJSONArray("documents").toList();
+    }
+
+    public float[] generateSemanticEmbedding(String code) {
+        try {
+            String embeddingStr = getEmbedding(code);
+            // 将JSON数组字符串转换为float数组
+            JSONArray jsonArray = new JSONArray(embeddingStr);
+            float[] embedding = new float[jsonArray.length()];
+            for (int i = 0; i < jsonArray.length(); i++) {
+                embedding[i] = jsonArray.getFloat(i);
+            }
+            return embedding;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new float[0];
+        }
     }
 }

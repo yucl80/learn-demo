@@ -1,34 +1,58 @@
 package com.yucl.code.search;
 
+import org.elasticsearch.client.RestHighLevelClient;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
-public class MultiModalIndexer {
+public class MultiModalIndexer implements AutoCloseable {
 
-    private TextIndexer textIndexer;
-    private StructureIndexer structureIndexer;
-    private SemanticIndexer semanticIndexer;
+    private final TextIndexer textIndexer;
+    private final StructureIndexer structureIndexer;
+    private final SemanticIndexer semanticIndexer;
 
-    public MultiModalIndexer(TextIndexer textIndexer, StructureIndexer structureIndexer, SemanticIndexer semanticIndexer) {
-        this.textIndexer = textIndexer;
-        this.structureIndexer = structureIndexer;
-        this.semanticIndexer = semanticIndexer;
+    public MultiModalIndexer(RestHighLevelClient client, String openAIKey, String chromaDBUrl) {
+        this.textIndexer = new TextIndexer(client);
+        this.structureIndexer = new StructureIndexer(client);
+        this.semanticIndexer = new SemanticIndexer(openAIKey, chromaDBUrl);
     }
 
-    public void indexCode(String id, String codeContent) {
-        // 生成文本、结构和语义索引
-        String textIndex = codeContent;
-        String structureIndex = structureIndexer.generateStructureIndex(codeContent);
-        float[] semanticIndex = semanticIndexer.generateSemanticEmbedding(codeContent);
+    public void indexCode(String code) throws IOException {
+        String id = UUID.randomUUID().toString();
+        
+        // 生成元数据
+        Map<String, Object> metadata = new HashMap<>();
+        metadata.put("timestamp", System.currentTimeMillis());
+        metadata.put("language", "java");
+        
+        // 文本索引
+        textIndexer.indexCode(id, code, metadata);
+        
+        // 结构索引
+        structureIndexer.indexStructure(id, code);
+        
+        // 语义索引
+        try {
+            semanticIndexer.createIndex(code);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-        // 存储索引信息
-        Map<String, Object> indexData = new HashMap<>();
-        indexData.put("text", textIndex);
-        indexData.put("structure", structureIndex);
-        indexData.put("semantic", semanticIndex);
+    public void indexBatch(Map<String, String> codeMap) {
+        codeMap.forEach((id, code) -> {
+            try {
+                indexCode(code);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+    }
 
-        // 这里可以将 indexData 存储到数据库或索引引擎中
+    @Override
+    public void close() throws IOException {
+        textIndexer.close();
+        structureIndexer.close();
     }
 }
-
-

@@ -1,6 +1,5 @@
 package com.yucl.code.search;
 
-
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
@@ -19,7 +18,7 @@ public class SmartCodeEmbeddingProcessor {
 
     private static final int MAX_CONTEXT_SIZE = 4096; // Adjust based on LLM's context size
     private static final int OVERLAP_SIZE = 512; // Overlap size for splitting
-
+    private static final String openAIKey = "YOUR_OPENAI_KEY";
 
     // Process a single file and generate embeddings
     public void processFile(String filePath) throws Exception {
@@ -40,12 +39,12 @@ public class SmartCodeEmbeddingProcessor {
                 if (block.length() <= MAX_CONTEXT_SIZE) {
                     System.out.println("Embedding for block in function: " + method.getName());
                     List<float[]> embeddings = generateEmbeddings(block);
-                    // Store or process embeddings
+                    storeEmbeddings(method.getName(), embeddings);
                 } else {
                     List<String> chunks = splitBlockIntoChunks(block);
                     for (String chunk : chunks) {
                         List<float[]> embeddings = generateEmbeddings(chunk);
-                        // Store or process embeddings
+                        storeEmbeddings(method.getName(), embeddings);
                     }
                 }
             }
@@ -90,9 +89,40 @@ public class SmartCodeEmbeddingProcessor {
     }
 
     private List<float[]> generateEmbeddings(String code) {
-        // Call OpenAI or another service to generate embeddings
-        // Here is a placeholder for actual embedding generation
-        return new ArrayList<>();
+        List<float[]> embeddings = new ArrayList<>();
+        try {
+            // 使用SemanticIndexer生成嵌入
+            SemanticIndexer semanticIndexer = new SemanticIndexer(openAIKey, "http://localhost:8000");
+            float[] embedding = semanticIndexer.generateSemanticEmbedding(code);
+            embeddings.add(embedding);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return embeddings;
+    }
+
+    private void storeEmbeddings(String blockId, List<float[]> embeddings) {
+        try {
+            // 存储嵌入到ChromaDB
+            for (float[] embedding : embeddings) {
+                JSONObject metadata = new JSONObject()
+                    .put("blockId", blockId)
+                    .put("timestamp", System.currentTimeMillis());
+                
+                HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create("http://localhost:8000/add"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(new JSONObject()
+                        .put("embedding", embedding)
+                        .put("metadata", metadata)
+                        .toString()))
+                    .build();
+
+                HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private String extendBlockWithContext(String block, MethodDeclaration method) {
@@ -184,9 +214,5 @@ public class SmartCodeEmbeddingProcessor {
 
         return extendedBlock.toString();
     }
-
-
-
-
 
 }
